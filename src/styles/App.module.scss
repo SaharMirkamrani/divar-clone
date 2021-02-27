@@ -1,0 +1,11 @@
+@import './variables.module.scss';
+
+
+*{
+  direction: rtl;
+}
+
+.test{
+  font-family: $font-family;
+}
+
