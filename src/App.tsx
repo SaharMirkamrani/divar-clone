@@ -1,19 +1,16 @@
 import React from 'react';
-import logo from './logo/logo.svg';
-// import styles from './styles/styles.module.scss'
-import styles from './styles/App.module.scss'
+import BannerList from './BannerList';
+import styles from './styles/App.module.scss';
 import './styles/variables.module.scss';
-
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <header>
         {/* <img src={logo} alt="logo" /> */}
-        <p className={styles.test}>
-          این یک تست برای امتحان کردن فونت است.
-        </p>
+        <p className={styles.test}>این یک تست برای امتحان کردن فونت است.</p>
       </header>
+      <BannerList />
     </div>
   );
 }
