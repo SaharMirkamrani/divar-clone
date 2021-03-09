@@ -1,5 +1,8 @@
 import React from 'react';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+
 import {
+  Box,
   Card,
   CardContent,
   CardMedia,
@@ -15,24 +18,33 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+
   price: {
     fontSize: 16,
   },
+
   time: {
     fontSize: 14,
   },
+
   content: {
     height: '80%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+
   cover: {
     width: 150,
     height: 145,
     objectFit: 'contain',
     borderRadius: 4,
     marginLeft: 12,
+  },
+
+  icon: {
+    alignSelf: 'flex-end',
+    marginLeft: 5,
   },
 });
 function Banner() {
@@ -50,10 +62,13 @@ function Banner() {
           </Typography>
         </div>
       </CardContent>
-      <CardMedia
-        className={classes.cover}
-        image='https://s100.divarcdn.com/static/pictures/1614531970/wXNy5CSB.webp'
-      />
+      <Box display='flex' flexDirection='row-reverse'>
+        <CardMedia
+          className={classes.cover}
+          image='https://s100.divarcdn.com/static/pictures/1614531970/wXNy5CSB.webp'
+        />
+        <ChatBubbleOutlineIcon fontSize='small' className={classes.icon} />
+      </Box>
     </Card>
   );
 }
