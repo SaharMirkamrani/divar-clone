@@ -24,7 +24,7 @@ export default function BannerList() {
         {Array(8)
           .fill(1)
           .map(() => (
-            <Grid className={classes.spacing} item xs={12} sm={6}>
+            <Grid className={classes.spacing} item xs={12} md={6}>
               <Banner />
             </Grid>
           ))}
