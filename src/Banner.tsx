@@ -60,6 +60,7 @@ const Banner: React.FC<widgetType> = (widget) => {
             {widget.data.description}
           </Typography>
           <Typography className={classes.time} color='textSecondary'>
+            <Typography style={{display: 'inline'}} color='error'>{widget.data.red_text}</Typography>
             {widget.data.normal_text}
           </Typography>
         </div>
