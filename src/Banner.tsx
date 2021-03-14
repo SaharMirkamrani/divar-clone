@@ -54,13 +54,13 @@ const Banner: React.FC<widgetType> = (widget) => {
   return (
     <Card className={classes.root} variant='outlined'>
       <CardContent className={classes.content}>
-        <Typography variant='h5'>{widget.data.title}</Typography>
+        <Typography variant='h6'>{widget.data.title}</Typography>
         <div>
           <Typography className={classes.price} color='textSecondary'>
             {widget.data.description}
           </Typography>
           <Typography className={classes.time} color='textSecondary'>
-            time
+            {widget.data.normal_text}
           </Typography>
         </div>
       </CardContent>

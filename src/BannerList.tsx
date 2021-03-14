@@ -27,7 +27,13 @@ const BannerList: React.FC<propsType> = ({ widget_list }) => {
     <div className={classes.root}>
       <Grid container>
         {widget_list.map((widget) => (
-          <Grid className={classes.spacing} item xs={12} md={6}>
+          <Grid
+            key={widget.data.token}
+            className={classes.spacing}
+            item
+            xs={12}
+            md={6}
+          >
             <Banner {...widget} />
           </Grid>
         ))}
