@@ -9,6 +9,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
+import { widget as widgetType } from './api_types';
 
 const useStyles = makeStyles({
   root: {
@@ -47,15 +48,15 @@ const useStyles = makeStyles({
     marginLeft: 5,
   },
 });
-function Banner() {
+const Banner: React.FC<widgetType> = (widget) => {
   const classes = useStyles();
   return (
     <Card className={classes.root} variant='outlined'>
       <CardContent className={classes.content}>
-        <Typography variant='h5'>title</Typography>
+        <Typography variant='h5'>{widget.data.title}</Typography>
         <div>
           <Typography className={classes.price} color='textSecondary'>
-            price
+            {widget.data.description}
           </Typography>
           <Typography className={classes.time} color='textSecondary'>
             time
@@ -63,14 +64,11 @@ function Banner() {
         </div>
       </CardContent>
       <Box display='flex' flexDirection='row-reverse'>
-        <CardMedia
-          className={classes.cover}
-          image='https://s100.divarcdn.com/static/pictures/1614531970/wXNy5CSB.webp'
-        />
+        <CardMedia className={classes.cover} image={widget.data.image} />
         <ChatBubbleOutlineIcon fontSize='small' className={classes.icon} />
       </Box>
     </Card>
   );
-}
+};
 
 export default Banner;
