@@ -69,7 +69,9 @@ const Banner: React.FC<widgetType> = (widget) => {
           className={classes.cover}
           image={widget.data.image || noImage}
         />
-        <ChatBubbleOutlineIcon fontSize='small' className={classes.icon} />
+        {widget.data.has_chat ? (
+          <ChatBubbleOutlineIcon fontSize='small' className={classes.icon} />
+        ) : null}
       </Box>
     </Card>
   );
