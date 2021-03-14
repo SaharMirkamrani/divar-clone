@@ -1,5 +1,6 @@
 import React from 'react';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import noImage from './no-image.png';
 
 import {
   Box,
@@ -64,7 +65,10 @@ const Banner: React.FC<widgetType> = (widget) => {
         </div>
       </CardContent>
       <Box display='flex' flexDirection='row-reverse'>
-        <CardMedia className={classes.cover} image={widget.data.image} />
+        <CardMedia
+          className={classes.cover}
+          image={widget.data.image || noImage}
+        />
         <ChatBubbleOutlineIcon fontSize='small' className={classes.icon} />
       </Box>
     </Card>
