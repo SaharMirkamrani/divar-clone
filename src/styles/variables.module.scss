@@ -8,34 +8,33 @@ $browse-items-border: #be3737;
 $browse-items-bg-on-hover: #be3737;
 $browse-items-text-normal: #be3737;
 $browse-items-text-on-hover: #fff;
-$navbar-city-button-bg-on-hover: rgba(0,0,0,.6);
+$navbar-city-button-bg-on-hover: rgba(0, 0, 0, 0.6);
 $navbar-city-button-bg: #fff;
-$navbar-city-button-text: rgba(0,0,0,.87);
+$navbar-city-button-text: rgba(0, 0, 0, 0.87);
 $navbar-city-button-text-on-hover: #000;
-$navbar-links-text: rgba(0,0,0,.87);
-$navbar-links-text-on-hover: rgba(0,0,0,.60);
-$cities-buttons-bg-on-hover: rgba(166,38,38,.56);
-$cities-buttons-border: rgba(166,38,38,.56);
-$cities-buttons-text: rgba(166,38,38,.56);
+$navbar-links-text: rgba(0, 0, 0, 0.87);
+$navbar-links-text-on-hover: rgba(0, 0, 0, 0.6);
+$cities-buttons-bg-on-hover: rgba(166, 38, 38, 0.56);
+$cities-buttons-border: rgba(166, 38, 38, 0.56);
+$cities-buttons-text: rgba(166, 38, 38, 0.56);
 $active-cities-buttons-bg-on-hover: #be3737;
 $dropdown-menu-items-bg-on-hover: #ededed;
 $dropdown-menu-search-button-bg: #ededed;
 $dropdown-menu-items-border: #bdbdbd;
-$dropdown-menu-items-head-link: rgba(0,0,0,.87);
-$dropdown-menu-items-text: rgba(0,0,0,.56);
+$dropdown-menu-items-head-link: rgba(0, 0, 0, 0.87);
+$dropdown-menu-items-text: rgba(0, 0, 0, 0.56);
 $dropdown-menu-items-text-on-hover: #a62626;
-$sidebar-text: rgba(0,0,0,.56);
+$sidebar-text: rgba(0, 0, 0, 0.56);
 $sidebar-text-on-hover: #000;
-
 
 //font
 
-$font-path: "../fonts/Iranian-Sans.ttf" !default;
-@font-face{
-  font-family: A Iranian Sans;
-  src: url('#{$font-path}');
+$font-path: "../fonts/Vazir.ttf" !default;
+@font-face {
+  font-family: Vazir;
+  src: url("#{$font-path}");
 }
-$font-family: A Iranian Sans;
+$font-family: Vazir;
 $body-font-weight: 400;
 $body-font-size: 1rem;
 $dropdown-menu-items-font-size: 1.001875rem;

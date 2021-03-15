@@ -1,15 +1,7 @@
-@import './variables.module.scss';
+@import "./variables.module.scss";
 
-
-*{
+* {
   direction: rtl;
   margin: 0px;
   box-sizing: border-box;
 }
-
-
-
-.test{
-  font-family: $font-family;
-}
-
