@@ -1,5 +1,6 @@
 import React from 'react';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import noImage from './no-image.png';
 
 import {
   Box,
@@ -9,6 +10,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
+import { widget as widgetType } from './api_types';
 
 const useStyles = makeStyles({
   root: {
@@ -47,30 +49,33 @@ const useStyles = makeStyles({
     marginLeft: 5,
   },
 });
-function Banner() {
+const Banner: React.FC<widgetType> = (widget) => {
   const classes = useStyles();
   return (
     <Card className={classes.root} variant='outlined'>
       <CardContent className={classes.content}>
-        <Typography variant='h5'>title</Typography>
+        <Typography variant='h6'>{widget.data.title}</Typography>
         <div>
           <Typography className={classes.price} color='textSecondary'>
-            price
+            {widget.data.description}
           </Typography>
           <Typography className={classes.time} color='textSecondary'>
-            time
+            <Typography style={{display: 'inline'}} color='error'>{widget.data.red_text}</Typography>
+            {widget.data.normal_text}
           </Typography>
         </div>
       </CardContent>
       <Box display='flex' flexDirection='row-reverse'>
         <CardMedia
           className={classes.cover}
-          image='https://s100.divarcdn.com/static/pictures/1614531970/wXNy5CSB.webp'
+          image={widget.data.image || noImage}
         />
-        <ChatBubbleOutlineIcon fontSize='small' className={classes.icon} />
+        {widget.data.has_chat ? (
+          <ChatBubbleOutlineIcon fontSize='small' className={classes.icon} />
+        ) : null}
       </Box>
     </Card>
   );
-}
+};
 
 export default Banner;
