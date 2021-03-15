@@ -11,6 +11,8 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Logo from "./logo/logo.svg";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import styles from "./styles/App.module.scss";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,25 +84,37 @@ export default function Navbar() {
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Box className={classes.rightMenu}>
-          <a href="/s/tehran">
+          <Link className={styles.link} to="/tehran">
             <img
               style={{ width: "40px", height: "40px" }}
               alt="logo"
               src={Logo}
             />
-          </a>
-          <Button className={classes.cityButton}>
-            <LocationOnIcon></LocationOnIcon> تهران
-          </Button>
+          </Link>
+          <Link className={styles.link} to="/tehran">
+            <Button className={classes.cityButton}>
+              <LocationOnIcon></LocationOnIcon> تهران
+            </Button>
+          </Link>
         </Box>
         <Toolbar className={classes.toolbar}>
           {desktop && (
             <div>
-              <Button className={classes.button}>دیوار من</Button>
-              <Button className={classes.button}>چت</Button>
-              <Button className={classes.button}>درباره دیوار</Button>
-              <Button className={classes.button}>بلاگ</Button>
-              <Button className={classes.button}>پشتیبانی</Button>
+              <Link className={styles.link} to="/my-divar/my-posts">
+                <Button className={classes.button}>دیوار من</Button>
+              </Link>
+              <Link className={styles.link} to="/chat">
+                <Button className={classes.button}>چت</Button>
+              </Link>
+              <Link className={styles.link} to="/about">
+                <Button className={classes.button}>درباره دیوار</Button>
+              </Link>
+              <Link className={styles.link} to="/blog">
+                <Button className={classes.button}>بلاگ</Button>
+              </Link>
+              <Link className={styles.link} to="/support">
+                <Button className={classes.button}>پشتیبانی</Button>
+              </Link>
             </div>
           )}
           <Button className={classes.buttonMain}>ثبت آگهی</Button>
