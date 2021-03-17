@@ -9,9 +9,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       paddingTop: "70px",
-      marginRight: 380,
+      marginRight: 290,
       flexGrow: 1,
-      width: '70%',
+      width: '78%',
     },
     spacing: {
       padding: theme.spacing(1),

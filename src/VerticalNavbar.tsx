@@ -12,8 +12,6 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import {
   FormControl,
   FormControlLabel,
@@ -26,6 +24,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import HomeWorkOutlinedIcon from '@material-ui/icons/HomeWorkOutlined';
+import DriveEtaOutlinedIcon from '@material-ui/icons/DriveEtaOutlined';
+import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
+import WatchOutlinedIcon from '@material-ui/icons/WatchOutlined';
+import CasinoOutlinedIcon from '@material-ui/icons/CasinoOutlined';
+import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
+import EventSeatOutlinedIcon from '@material-ui/icons/EventSeatOutlined';
+import BusinessCenterOutlinedIcon from '@material-ui/icons/BusinessCenterOutlined';
 
 const drawerWidth = 290;
 
@@ -59,6 +65,15 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth: 180,
       marginTop: -40,
     },
+    category: {
+      padding: '20px 15px 0',
+      fontFamily: 'Vazir',
+    },
+    listItemText: {
+      fontSize: '14px',
+      fontFamily: 'Vazir',
+      color: '#5b5b5b',
+    },
   })
 );
 
@@ -72,16 +87,37 @@ export default function VerticalNavbar() {
   };
 
   const categories = [
-    'املاک',
-    'وسایل نقلیه',
-    'لوازم الکترونیکی',
-    'مربوط به خانه',
-    'خدمات',
-    'وسایل شخصی',
-    'سرگرمی و فراغت',
-    'اجتماعی',
-    'برای کسب و کار',
-    'استخدام و کاریابی',
+    { name: 'املاک', icon: () => <HomeWorkOutlinedIcon fontSize='small' /> },
+    {
+      name: 'وسایل نقلیه',
+      icon: () => <DriveEtaOutlinedIcon fontSize='small' />,
+    },
+    {
+      name: 'لوازم الکترونیکی',
+      icon: () => <PhoneIphoneOutlinedIcon fontSize='small' />,
+    },
+    { name: 'مربوط به خانه', icon: () => null },
+    { name: 'خدمات', icon: () => null },
+    {
+      name: 'وسایل شخصی',
+      icon: () => <WatchOutlinedIcon fontSize='small' />,
+    },
+    {
+      name: 'سرگرمی و فراغت',
+      icon: () => <CasinoOutlinedIcon fontSize='small' />,
+    },
+    {
+      name: 'اجتماعی',
+      icon: () => <PeopleAltOutlinedIcon fontSize='small' />,
+    },
+    {
+      name: 'برای کسب و کار',
+      icon: () => <EventSeatOutlinedIcon fontSize='small' />,
+    },
+    {
+      name: 'استخدام و کاریابی',
+      icon: () => <BusinessCenterOutlinedIcon fontSize='small' />,
+    },
   ];
 
   const Accordion = withStyles({
@@ -136,13 +172,15 @@ export default function VerticalNavbar() {
       >
         <Divider />
         <List>
-          <Typography>دسته بندی ها</Typography>
-          {categories.map((text, index) => (
-            <ListItem button key={text} className={classes.listItem}>
-              <ListItemText primary={text} />
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
+          <Typography className={classes.category}>دسته بندی ها</Typography>
+          {categories.map((category, index) => (
+            <ListItem button key={category.name} className={classes.listItem}>
+              <ListItemIcon>{category.icon()}</ListItemIcon>
+              <ListItemText
+                style={{ marginRight: '-30px' }}
+                classes={{ primary: classes.listItemText }}
+                primary={category.name}
+              />
             </ListItem>
           ))}
         </List>
