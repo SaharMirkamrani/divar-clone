@@ -4,6 +4,7 @@ import BannerList from "./BannerList";
 import styles from "./styles/App.module.scss";
 import Navbar from "./Navbar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import VerticalNavbar from "./VerticalNavbar";
 
 function App() {
   const [apiData, setApiData] = useState<api | {}>({});
@@ -33,6 +34,7 @@ function App() {
           <h2>Loading...</h2>
         )}
       </div>
+      <VerticalNavbar />
     </Router>
   );
 }
