@@ -8,15 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import HomeWorkOutlinedIcon from '@material-ui/icons/HomeWorkOutlined';
-import DriveEtaOutlinedIcon from '@material-ui/icons/DriveEtaOutlined';
-import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
-import WatchOutlinedIcon from '@material-ui/icons/WatchOutlined';
-import CasinoOutlinedIcon from '@material-ui/icons/CasinoOutlined';
-import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
-import EventSeatOutlinedIcon from '@material-ui/icons/EventSeatOutlined';
-import BusinessCenterOutlinedIcon from '@material-ui/icons/BusinessCenterOutlined';
-import { Accordion, AccordionDetails, AccordionSummary } from './accordin';
+import { Accordion, AccordionDetails, AccordionSummary } from './accordion';
 import {
   FormControl,
   FormControlLabel,
@@ -25,7 +17,7 @@ import {
   Select,
   Switch,
 } from '@material-ui/core';
-
+import categories from './categories';
 
 const drawerWidth = 290;
 
@@ -52,8 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'right',
     },
     heading: {
-      fontSize: theme.typography.pxToRem(15),
-      fontWeight: theme.typography.fontWeightRegular,
+      fontFamily: 'Vazir',
+      fontSize: '12px',
+      fontWeight: 'bold',
     },
     formControl: {
       minWidth: 180,
@@ -68,6 +61,10 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: 'Vazir',
       color: '#5b5b5b',
     },
+    formControlLabel: {
+      fontSize: '12px',
+      fontWeight: 'bold',
+    },
   })
 );
 
@@ -79,40 +76,6 @@ export default function VerticalNavbar() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
-
-  const categories = [
-    { name: 'املاک', icon: () => <HomeWorkOutlinedIcon fontSize='small' /> },
-    {
-      name: 'وسایل نقلیه',
-      icon: () => <DriveEtaOutlinedIcon fontSize='small' />,
-    },
-    {
-      name: 'لوازم الکترونیکی',
-      icon: () => <PhoneIphoneOutlinedIcon fontSize='small' />,
-    },
-    { name: 'مربوط به خانه', icon: () => null },
-    { name: 'خدمات', icon: () => null },
-    {
-      name: 'وسایل شخصی',
-      icon: () => <WatchOutlinedIcon fontSize='small' />,
-    },
-    {
-      name: 'سرگرمی و فراغت',
-      icon: () => <CasinoOutlinedIcon fontSize='small' />,
-    },
-    {
-      name: 'اجتماعی',
-      icon: () => <PeopleAltOutlinedIcon fontSize='small' />,
-    },
-    {
-      name: 'برای کسب و کار',
-      icon: () => <EventSeatOutlinedIcon fontSize='small' />,
-    },
-    {
-      name: 'استخدام و کاریابی',
-      icon: () => <BusinessCenterOutlinedIcon fontSize='small' />,
-    },
-  ];
 
   return (
     <div className={classes.root}>
@@ -143,7 +106,8 @@ export default function VerticalNavbar() {
           control={
             <Switch checked={checked} onChange={handleChange} name='checkedA' />
           }
-          label='فقط آگهی های فروش'
+          classes={{ label: classes.formControlLabel }}
+          label='فقط آگهی های فروشگاه'
           labelPlacement='start'
         />
         <Divider />
