@@ -1,4 +1,6 @@
 import React from 'react';
+import { Accordion, AccordionDetails, AccordionSummary } from './accordion';
+import categories from './categories';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -8,7 +10,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary } from './accordion';
 import {
   FormControl,
   FormControlLabel,
@@ -17,7 +18,6 @@ import {
   Select,
   Switch,
 } from '@material-ui/core';
-import categories from './categories';
 
 const drawerWidth = 290;
 
@@ -49,8 +49,8 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 'bold',
     },
     formControl: {
-      minWidth: 180,
-      marginTop: -40,
+      width: '100%',
+      marginTop: -20,
     },
     category: {
       padding: '20px 15px 0',
@@ -62,8 +62,19 @@ const useStyles = makeStyles((theme: Theme) =>
       color: '#5b5b5b',
     },
     formControlLabel: {
+      width: '100%',
+      padding: '10px 0',
+      display: 'flex',
+      justifyContent: 'space-around',
+    },
+    formControlLabelText: {
+      width: '130px',
       fontSize: '12px',
       fontWeight: 'bold',
+      color: '#4c4c4c',
+    },
+    inputLabel: {
+      fontFamily: 'Vazir',
     },
   })
 );
@@ -106,11 +117,11 @@ export default function VerticalNavbar() {
           control={
             <Switch checked={checked} onChange={handleChange} name='checkedA' />
           }
-          classes={{ label: classes.formControlLabel }}
+          classes={{ label: classes.formControlLabelText }}
+          className={classes.formControlLabel}
           label='فقط آگهی های فروشگاه'
           labelPlacement='start'
         />
-        <Divider />
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -121,18 +132,17 @@ export default function VerticalNavbar() {
           </AccordionSummary>
           <AccordionDetails>
             <FormControl className={classes.formControl}>
-              <InputLabel id='demo-simple-select-label'>Age</InputLabel>
+              <InputLabel className={classes.inputLabel}>
+                همه محله ها
+              </InputLabel>
               <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                value={age}
                 onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
                   setAge(event.target.value as string);
                 }}
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem>آبشار</MenuItem>
+                <MenuItem>آبشار</MenuItem>
+                <MenuItem>آبشار</MenuItem>
               </Select>
             </FormControl>
           </AccordionDetails>
@@ -147,10 +157,8 @@ export default function VerticalNavbar() {
           </AccordionSummary>
           <AccordionDetails>
             <FormControl className={classes.formControl}>
-              <InputLabel id='demo-simple-select-label'>Age</InputLabel>
+              <InputLabel className={classes.inputLabel}>Age</InputLabel>
               <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
                 value={age}
                 onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
                   setAge(event.target.value as string);
@@ -163,6 +171,26 @@ export default function VerticalNavbar() {
             </FormControl>
           </AccordionDetails>
         </Accordion>
+        <Divider />
+        <FormControlLabel
+          control={
+            <Switch checked={checked} onChange={handleChange} name='checkedA' />
+          }
+          className={classes.formControlLabel}
+          classes={{ label: classes.formControlLabelText }}
+          label='فقط عکس دار'
+          labelPlacement='start'
+        />
+        <Divider />
+        <FormControlLabel
+          control={
+            <Switch checked={checked} onChange={handleChange} name='checkedA' />
+          }
+          className={classes.formControlLabel}
+          classes={{ label: classes.formControlLabelText }}
+          label='فقط فوری'
+          labelPlacement='start'
+        />
         <Divider />
         <Typography>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
