@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Theme,
-  createStyles,
-  makeStyles,
-  withStyles,
-} from '@material-ui/core/styles';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -12,18 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import {
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  Switch,
-} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MuiAccordion from '@material-ui/core/Accordion';
-import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
-import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import HomeWorkOutlinedIcon from '@material-ui/icons/HomeWorkOutlined';
 import DriveEtaOutlinedIcon from '@material-ui/icons/DriveEtaOutlined';
 import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
@@ -32,6 +16,16 @@ import CasinoOutlinedIcon from '@material-ui/icons/CasinoOutlined';
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import EventSeatOutlinedIcon from '@material-ui/icons/EventSeatOutlined';
 import BusinessCenterOutlinedIcon from '@material-ui/icons/BusinessCenterOutlined';
+import { Accordion, AccordionDetails, AccordionSummary } from './accordin';
+import {
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+  Switch,
+} from '@material-ui/core';
+
 
 const drawerWidth = 290;
 
@@ -119,46 +113,6 @@ export default function VerticalNavbar() {
       icon: () => <BusinessCenterOutlinedIcon fontSize='small' />,
     },
   ];
-
-  const Accordion = withStyles({
-    root: {
-      width: '100%',
-      border: '1px solid rgba(0, 0, 0, .125)',
-      boxShadow: 'none',
-      '&:not(:last-child)': {
-        borderBottom: 0,
-      },
-      '&:before': {
-        display: 'none',
-      },
-      '&$expanded': {
-        margin: 'auto',
-      },
-    },
-    expanded: {},
-  })(MuiAccordion);
-
-  const AccordionSummary = withStyles({
-    root: {
-      marginBottom: -1,
-      minHeight: 56,
-      '&$expanded': {
-        minHeight: 56,
-      },
-    },
-    content: {
-      '&$expanded': {
-        margin: '12px 0',
-      },
-    },
-    expanded: {},
-  })(MuiAccordionSummary);
-
-  const AccordionDetails = withStyles((theme) => ({
-    root: {
-      padding: theme.spacing(2),
-    },
-  }))(MuiAccordionDetails);
 
   return (
     <div className={classes.root}>
