@@ -4,6 +4,7 @@ import BannerList from './BannerList';
 import styles from './styles/App.module.scss';
 import Navbar from './Navbar';
 import { BrowserRouter as Router } from 'react-router-dom';
+import Search from './Search';
 
 function App() {
   const [apiData, setApiData] = useState<api | {}>({});
@@ -27,6 +28,7 @@ function App() {
     <Router>
       <div className={styles.app}>
         <Navbar />
+        <Search />
         {'widget_list' in apiData ? (
           <BannerList widget_list={apiData.widget_list} />
         ) : (

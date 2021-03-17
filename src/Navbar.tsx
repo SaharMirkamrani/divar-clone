@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      position: 'absolute',
+      top: '0px',
     },
     cityButton: {
       color: '#555',
@@ -84,7 +86,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     menuHamburger: {
-      height: '330px',
+      height: '360px',
     },
     menuDropdown: {
       fontFamily: 'Vazir',
