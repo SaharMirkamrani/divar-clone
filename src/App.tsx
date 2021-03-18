@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { api } from './api_types';
-import BannerList from './BannerList';
-import styles from './styles/App.module.scss';
-import Navbar from './Navbar';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Search from './Search';
+import React, { useEffect, useState } from "react";
+import { api } from "./api_types";
+import BannerList from "./BannerList";
+import styles from "./styles/App.module.scss";
+import Navbar from "./Navbar";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   const [apiData, setApiData] = useState<api | {}>({});
@@ -13,7 +12,7 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://api.divar.ir/v8/web-search/tehran'
+          "https://api.divar.ir/v8/web-search/tehran"
         );
         const data = await response.json();
         setApiData(data);
@@ -28,8 +27,7 @@ function App() {
     <Router>
       <div className={styles.app}>
         <Navbar />
-        <Search />
-        {'widget_list' in apiData ? (
+        {"widget_list" in apiData ? (
           <BannerList widget_list={apiData.widget_list} />
         ) : (
           <h2>Loading...</h2>
