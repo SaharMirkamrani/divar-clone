@@ -8,6 +8,8 @@ import {
   Box,
   useMediaQuery,
 } from '@material-ui/core';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Logo from './logo/logo.svg';
@@ -18,6 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      position: 'absolute',
+      top: '0px',
     },
     cityButton: {
       color: '#555',
@@ -74,24 +78,46 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: '#be3737',
       },
     },
+    hamburger: {
+      width: '50px',
+      padding: '0px',
+      '&:hover': {
+        backgroundColor: '#fff',
+      },
+    },
+    menuHamburger: {
+      height: '360px',
+    },
+    menuDropdown: {
+      fontFamily: 'Vazir',
+    },
   })
 );
 
 export default function Navbar() {
   const classes = useStyles();
   const desktop = useMediaQuery('(min-width: 947px)');
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appbar} position='static'>
+      <AppBar className={classes.appbar} position="static">
         <Box className={classes.rightMenu}>
-          <Link className={styles.link} to='/tehran'>
+          <Link className={styles.link} to="/tehran">
             <img
               style={{ width: '40px', height: '40px' }}
-              alt='logo'
+              alt="logo"
               src={Logo}
             />
           </Link>
-          <Link className={styles.link} to='/tehran'>
+          <Link className={styles.link} to="/tehran">
             <Button className={classes.cityButton}>
               <LocationOnIcon></LocationOnIcon> تهران
             </Button>
@@ -100,28 +126,74 @@ export default function Navbar() {
         <Toolbar className={classes.toolbar}>
           {desktop && (
             <div>
-              <Link className={styles.link} to='/my-divar/my-posts'>
+              <Link className={styles.link} to="/my-divar/my-posts">
                 <Button className={classes.button}>دیوار من</Button>
               </Link>
-              <Link className={styles.link} to='/chat'>
+              <Link className={styles.link} to="/chat">
                 <Button className={classes.button}>چت</Button>
               </Link>
-              <Link className={styles.link} to='/about'>
+              <Link className={styles.link} to="/about">
                 <Button className={classes.button}>درباره دیوار</Button>
               </Link>
-              <Link className={styles.link} to='/blog'>
+              <Link className={styles.link} to="/blog">
                 <Button className={classes.button}>بلاگ</Button>
               </Link>
-              <Link className={styles.link} to='/support'>
+              <Link className={styles.link} to="/support">
                 <Button className={classes.button}>پشتیبانی</Button>
               </Link>
             </div>
           )}
           <Button className={classes.buttonMain}>ثبت آگهی</Button>
           {!desktop && (
-            <IconButton edge='start' color='inherit' aria-label='menu'>
-              <MenuIcon style={{ color: 'black' }} />
-            </IconButton>
+            <div>
+              <IconButton
+                className={classes.hamburger}
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                className={classes.menuHamburger}
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem
+                  className={classes.menuDropdown}
+                  onClick={handleClose}
+                >
+                  دیوار من
+                </MenuItem>
+                <MenuItem
+                  className={classes.menuDropdown}
+                  onClick={handleClose}
+                >
+                  چت
+                </MenuItem>
+                <MenuItem
+                  className={classes.menuDropdown}
+                  onClick={handleClose}
+                >
+                  درباره دیوار
+                </MenuItem>
+                <MenuItem
+                  className={classes.menuDropdown}
+                  onClick={handleClose}
+                >
+                  بلاگ
+                </MenuItem>
+                <MenuItem
+                  className={classes.menuDropdown}
+                  onClick={handleClose}
+                >
+                  پشتیبانی
+                </MenuItem>
+              </Menu>
+            </div>
           )}
         </Toolbar>
       </AppBar>
