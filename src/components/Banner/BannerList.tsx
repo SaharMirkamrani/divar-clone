@@ -1,9 +1,8 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Banner from './Banner';
-import { widget } from './api_types';
-import styles from './styles/App.module.scss'
+import Banner from './BannerItem';
+import { widget } from '../../api/api_types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

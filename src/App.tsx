@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { api } from './api_types';
-import BannerList from './BannerList';
+import { api } from './api/api_types';
+import BannerList from './components/Banner/BannerList';
 import styles from './styles/App.module.scss';
-import Navbar from './Navbar';
+import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import VerticalNavbar from './VerticalNavbar';
-import Search from './Search';
+import VerticalNavbar from './components/VerticalNavbar/VerticalNavbar';
+import Search from './components/Search/Search';
 
 function App() {
   const [apiData, setApiData] = useState<api | {}>({});
