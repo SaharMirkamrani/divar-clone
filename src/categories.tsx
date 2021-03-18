@@ -6,6 +6,8 @@ import CasinoOutlinedIcon from '@material-ui/icons/CasinoOutlined';
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import EventSeatOutlinedIcon from '@material-ui/icons/EventSeatOutlined';
 import BusinessCenterOutlinedIcon from '@material-ui/icons/BusinessCenterOutlined';
+import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined';
+import WeekendOutlinedIcon from '@material-ui/icons/WeekendOutlined';
 
 const categories = [
   { name: 'املاک', icon: () => <HomeWorkOutlinedIcon fontSize='small' /> },
@@ -17,8 +19,11 @@ const categories = [
     name: 'لوازم الکترونیکی',
     icon: () => <PhoneIphoneOutlinedIcon fontSize='small' />,
   },
-  { name: 'مربوط به خانه', icon: () => null },
-  { name: 'خدمات', icon: () => null },
+  {
+    name: 'مربوط به خانه',
+    icon: () => <WeekendOutlinedIcon fontSize='small' />,
+  },
+  { name: 'خدمات', icon: () => <LocalShippingOutlinedIcon fontSize='small' /> },
   {
     name: 'وسایل شخصی',
     icon: () => <WatchOutlinedIcon fontSize='small' />,
