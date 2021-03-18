@@ -10,7 +10,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import { widget as widgetType } from './api_types';
+import { widget as widgetType } from '../../api/api_types';
 
 const useStyles = makeStyles({
   root: {
