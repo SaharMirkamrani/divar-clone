@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -74,14 +74,16 @@ export default function Search() {
   const classes = useStyles();
   const tablet = useMediaQuery('(max-width: 1200px)');
   const [menuPosition, setMenuPosition] = useState<any>(null);
+  const dropdownBtnRef = useRef<HTMLButtonElement>(null);
+
   const handleClick = (event: any) => {
     if (menuPosition) {
       return;
     }
     event.preventDefault();
     setMenuPosition({
-      top: event.pageY,
-      left: event.pageX,
+      top: dropdownBtnRef.current?.getBoundingClientRect().bottom,
+      left: dropdownBtnRef.current?.getBoundingClientRect().left,
     });
   };
   const handleItemClick = (event: React.MouseEvent) => {
@@ -93,13 +95,17 @@ export default function Search() {
       <Box className={classes.root}>
         <Box className={classes.searchDropdown}>
           <div onClick={handleClick}>
-            <Button variant="contained" className={classes.dropdownBtn}>
+            <Button
+              ref={dropdownBtnRef}
+              variant='contained'
+              className={classes.dropdownBtn}
+            >
               <p>همه آگهی ها</p> <ArrowDropDownOutlinedIcon />
             </Button>
             <Menu
               open={!!menuPosition}
               onClose={() => setMenuPosition(null)}
-              anchorReference="anchorPosition"
+              anchorReference='anchorPosition'
               anchorPosition={menuPosition}
             >
               {menuItems.map((item) => {
@@ -110,7 +116,7 @@ export default function Search() {
                     label={item}
                     parentMenuOpen={!!menuPosition}
                     onClick={handleItemClick}
-                    component="section"
+                    component='section'
                   >
                     <Paper className={classes.submenu}>
                       <MenuItem onClick={handleItemClick}>تست یک</MenuItem>
@@ -125,9 +131,9 @@ export default function Search() {
           <form className={classes.form}>
             <TextField
               className={classes.textField}
-              id="outlined-basic"
-              variant="outlined"
-              placeholder="جستجو در همه آگهی ها"
+              id='outlined-basic'
+              variant='outlined'
+              placeholder='جستجو در همه آگهی ها'
               InputProps={{
                 classes: {
                   input: classes.resize,
