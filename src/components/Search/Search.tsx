@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Fade from '@material-ui/core/Fade';
 import Box from '@material-ui/core/Box';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ArrowDropDownOutlinedIcon from '@material-ui/icons/ArrowDropDownOutlined';
 import TextField from '@material-ui/core/TextField';
 import { useMediaQuery } from '@material-ui/core';
+import { Menu, MenuItem } from '@material-ui/core';
+import NestedMenuItem from 'material-ui-nested-menu-item';
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+import Paper from '@material-ui/core/Paper';
+import styles from '../../styles/App.module.scss';
+
+const menuItems: string[] = [
+  'همه آگهی ها',
+  'املاک',
+  'وسایل نقلیه',
+  'لوازم الکترونیکی',
+  'مربوط به خانه',
+  'خدمات',
+  'وسایل شخصی',
+  'سرگرمی و فراغت',
+  'اجتماعی',
+  'برای کسب و کار',
+  'استخدام و کاریابی',
+];
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,6 +56,13 @@ const useStyles = makeStyles((theme: Theme) =>
         boxShadow: 'none',
       },
     },
+    menu: {
+      // position: 'relative',
+    },
+    submenu: {
+      padding: '10px',
+      left: 0,
+    },
     textField: {},
     resize: {
       fontFamily: 'Vazir',
@@ -50,42 +73,53 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Search() {
   const classes = useStyles();
   const tablet = useMediaQuery('(max-width: 1200px)');
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const [menuPosition, setMenuPosition] = useState<any>(null);
+  const handleClick = (event: any) => {
+    if (menuPosition) {
+      return;
+    }
+    event.preventDefault();
+    setMenuPosition({
+      top: event.pageY,
+      left: event.pageX,
+    });
   };
-
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleItemClick = (event: React.MouseEvent) => {
+    setMenuPosition(null);
   };
 
   return (
     <div className={classes.searchBar}>
       <Box className={classes.root}>
         <Box className={classes.searchDropdown}>
-          <Button
-            variant="contained"
-            aria-controls="fade-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-            className={classes.dropdownBtn}
-          >
-            <p>همه آگهی ها</p> <ArrowDropDownOutlinedIcon />
-          </Button>
-          <Menu
-            id="fade-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Fade}
-          >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
-          </Menu>
+          <div onClick={handleClick}>
+            <Button variant="contained" className={classes.dropdownBtn}>
+              <p>همه آگهی ها</p> <ArrowDropDownOutlinedIcon />
+            </Button>
+            <Menu
+              open={!!menuPosition}
+              onClose={() => setMenuPosition(null)}
+              anchorReference="anchorPosition"
+              anchorPosition={menuPosition}
+            >
+              {menuItems.map((item) => {
+                return (
+                  <NestedMenuItem
+                    rightIcon={<ArrowLeftIcon />}
+                    key={item}
+                    label={item}
+                    parentMenuOpen={!!menuPosition}
+                    onClick={handleItemClick}
+                    component="section"
+                  >
+                    <Paper className={classes.submenu}>
+                      <MenuItem onClick={handleItemClick}>تست یک</MenuItem>
+                    </Paper>
+                  </NestedMenuItem>
+                );
+              })}
+            </Menu>
+          </div>
         </Box>
         <Box>
           <form className={classes.form}>
