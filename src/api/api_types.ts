@@ -1,5 +1,5 @@
 export interface api {
-  suggestion_list: any;
+  suggestion_list: suggestion[];
   input_suggestion: any;
   subtitle: string;
   title: string;
@@ -13,10 +13,14 @@ export interface api {
   schema: any;
   jli: any;
 }
-
 export interface widget {
   widget_type: string;
   data: widget_data;
+}
+
+export interface suggestion {
+  displayed_text: string;
+  value: suggestion_data;
 }
 
 export interface widget_data {
@@ -34,4 +38,15 @@ export interface widget_data {
   city: string;
   district: string;
   category: string;
+}
+
+export interface suggestion_data {
+  category: { value: string };
+}
+
+export interface Submenu_data {
+  id: number;
+  title: string;
+  info: { header: string; list: string[] }[];
+  footer: string;
 }
