@@ -6,6 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import VerticalNavbar from './components/VerticalNavbar/VerticalNavbar';
 import Search from './components/Search/Search';
+import Suggestion from './components/SuggestionBar/Suggestion';
 
 function App() {
   const [apiData, setApiData] = useState<api | {}>({});
@@ -30,6 +31,12 @@ function App() {
       <div className={styles.app}>
         <Navbar />
         <Search />
+        {'suggestion_list' in apiData && (
+          <Suggestion
+          suggestion_list={apiData.suggestion_list}
+        />
+        )}
+        
         {'widget_list' in apiData ? (
           <BannerList widget_list={apiData.widget_list} />
         ) : (

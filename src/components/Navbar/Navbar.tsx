@@ -64,7 +64,8 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: 'Vazir',
       '&:hover': {
         backgroundColor: '#fff',
-        color: '#444',
+        color: '#777',
+        curser: "pointer",
       },
     },
     buttonMain: {
