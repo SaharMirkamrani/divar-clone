@@ -13,7 +13,6 @@ export interface api {
   schema: any;
   jli: any;
 }
-
 export interface widget {
   widget_type: string;
   data: widget_data;
@@ -42,5 +41,12 @@ export interface widget_data {
 }
 
 export interface suggestion_data {
-  category: {value: string}
+  category: { value: string };
+}
+
+export interface Submenu_data {
+  id: number;
+  title: string;
+  info: { header: string; list: string[] }[];
+  footer: string;
 }

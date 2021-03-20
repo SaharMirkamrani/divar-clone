@@ -4,26 +4,10 @@ import Box from '@material-ui/core/Box';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ArrowDropDownOutlinedIcon from '@material-ui/icons/ArrowDropDownOutlined';
 import TextField from '@material-ui/core/TextField';
-import { useMediaQuery } from '@material-ui/core';
-import { Menu, MenuItem } from '@material-ui/core';
+import { Menu, MenuItem, Typography } from '@material-ui/core';
 import NestedMenuItem from '../NestedMenuItem/NestedMenuItem';
-import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import Paper from '@material-ui/core/Paper';
-import styles from '../../styles/App.module.scss';
-
-const menuItems: string[] = [
-  'همه آگهی ها',
-  'املاک',
-  'وسایل نقلیه',
-  'لوازم الکترونیکی',
-  'مربوط به خانه',
-  'خدمات',
-  'وسایل شخصی',
-  'سرگرمی و فراغت',
-  'اجتماعی',
-  'برای کسب و کار',
-  'استخدام و کاریابی',
-];
+import { submenu_data } from '../../components/MegaMenu/Submenu-data';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '600px',
       },
     },
-    searchDropdown: {},
     dropdownBtn: {
       display: 'flex',
       flexDirection: 'row',
@@ -56,14 +39,44 @@ const useStyles = makeStyles((theme: Theme) =>
         boxShadow: 'none',
       },
     },
-    menu: {
-      // position: 'relative',
-    },
     submenu: {
-      padding: '10px',
-      left: 0,
+      width: '650px',
+      height: '450px',
+      border: '1px solid white',
+      display: 'flex',
+      flexDirection: 'column',
+      flexWrap: 'wrap',
     },
-    textField: {},
+    menuItem_header: {
+      fontFamily: 'Vazir',
+      fontSize: '14px',
+      padding: '10px',
+    },
+    menuItem_item: {
+      fontFamily: 'Vazir',
+      fontSize: '12px',
+      color: 'gray',
+      paddingTop: '1px',
+      paddingBottom: '1px',
+      '&:hover': {
+        color: '#a62626',
+        backgroundColor: 'white',
+      },
+    },
+    menuItem_footer: {
+      fontFamily: 'Vazir',
+      fontSize: '12px',
+      color: '#a62626',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      position: 'absolute',
+      top: '420px',
+      left: '10px',
+      '&:hover': {
+        backgroundColor: 'white',
+      },
+    },
     resize: {
       fontFamily: 'Vazir',
     },
@@ -72,7 +85,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Search() {
   const classes = useStyles();
-  const tablet = useMediaQuery('(max-width: 1200px)');
   const [menuPosition, setMenuPosition] = useState<any>(null);
   const dropdownBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -93,11 +105,11 @@ export default function Search() {
   return (
     <div className={classes.searchBar}>
       <Box className={classes.root}>
-        <Box className={classes.searchDropdown}>
+        <Box>
           <div onClick={handleClick}>
             <Button
               ref={dropdownBtnRef}
-              variant='contained'
+              variant="contained"
               className={classes.dropdownBtn}
             >
               <p>همه آگهی ها</p> <ArrowDropDownOutlinedIcon />
@@ -105,26 +117,71 @@ export default function Search() {
             <Menu
               open={!!menuPosition}
               onClose={() => setMenuPosition(null)}
-              anchorReference='anchorPosition'
+              anchorReference="anchorPosition"
               anchorPosition={menuPosition}
             >
-              {menuItems.map((item) => {
+              <MenuItem style={{ fontFamily: 'Vazir' }}>همه ی آگهی ها</MenuItem>
+              {/* @ts-ignore */}
+              {submenu_data.map((item) => {
                 return (
                   <NestedMenuItem
                     left
-                    key={item}
-                    label={item}
+                    key={item.title}
+                    label={item.title}
                     MenuItemProps={{
                       dense: false,
-                      style: { direction: 'rtl', padding: '0.2em 0.5em' },
+                      style: {
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        direction: 'rtl',
+                        padding: '0.5em 0.9em',
+                        fontFamily: 'Vazir',
+                        fontSize: '14px',
+                      },
                     }}
                     mainMenuOpen={!!menuPosition}
                     onClick={handleItemClick}
-                    component='section'
                   >
-                    <Paper className={classes.submenu}>
-                      <MenuItem onClick={handleItemClick}>تست یک</MenuItem>
-                    </Paper>
+                    {/* @ts-ignore */}
+                    <Box className={classes.submenu} key={item.id}>
+                      {item.info &&
+                        item.info.map((categoryItem) => (
+                          <div>
+                            <Typography
+                              className={classes.menuItem_header}
+                              display="block"
+                              variant="h6"
+                              align="right"
+                            >
+                              <div>{categoryItem.header}</div>
+                            </Typography>
+                            {categoryItem.list &&
+                              categoryItem.list.map((li) => (
+                                <div>
+                                  <MenuItem
+                                    className={classes.menuItem_item}
+                                    onClick={handleItemClick}
+                                  >
+                                    <Typography
+                                      className={classes.menuItem_item}
+                                      key={li}
+                                    >
+                                      {li}
+                                      <br />
+                                    </Typography>
+                                  </MenuItem>
+                                </div>
+                              ))}
+                          </div>
+                        ))}
+                      <Button className={classes.menuItem_footer}>
+                        <div style={{ fontSize: '15px' }}>{item.footer}</div>
+                        <ArrowBackIosOutlinedIcon
+                          style={{ fontSize: '13px', margin: '10px' }}
+                        />
+                      </Button>
+                    </Box>
                   </NestedMenuItem>
                 );
               })}
@@ -134,10 +191,9 @@ export default function Search() {
         <Box>
           <form className={classes.form}>
             <TextField
-              className={classes.textField}
-              id='outlined-basic'
-              variant='outlined'
-              placeholder='جستجو در همه آگهی ها'
+              id="outlined-basic"
+              variant="outlined"
+              placeholder="جستجو در همه آگهی ها"
               InputProps={{
                 classes: {
                   input: classes.resize,

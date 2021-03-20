@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Logo from '../../logo/logo.svg';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../../styles/App.module.scss';
 
 const useStyles = makeStyles((theme: Theme) =>
