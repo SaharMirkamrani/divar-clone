@@ -6,7 +6,7 @@ import ArrowDropDownOutlinedIcon from '@material-ui/icons/ArrowDropDownOutlined'
 import TextField from '@material-ui/core/TextField';
 import { useMediaQuery } from '@material-ui/core';
 import { Menu, MenuItem } from '@material-ui/core';
-import NestedMenuItem from 'material-ui-nested-menu-item';
+import NestedMenuItem from '../NestedMenuItem/NestedMenuItem';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import Paper from '@material-ui/core/Paper';
 import styles from '../../styles/App.module.scss';
@@ -111,10 +111,14 @@ export default function Search() {
               {menuItems.map((item) => {
                 return (
                   <NestedMenuItem
-                    rightIcon={<ArrowLeftIcon />}
+                    left
                     key={item}
                     label={item}
-                    parentMenuOpen={!!menuPosition}
+                    MenuItemProps={{
+                      dense: false,
+                      style: { direction: 'rtl', padding: '0.2em 0.5em' },
+                    }}
+                    mainMenuOpen={!!menuPosition}
                     onClick={handleItemClick}
                     component='section'
                   >
