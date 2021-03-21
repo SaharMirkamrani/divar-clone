@@ -8,7 +8,7 @@ import VerticalNavbar from './components/VerticalNavbar/VerticalNavbar';
 import Search from './components/Search/Search';
 import Suggestion from './components/SuggestionBar/Suggestion';
 import SimilarProducts from './components/SimilarProducts/SimilarProducts';
-import ProductPage from './components/ProductPage';
+import ProductPage from './components/ProductPage/ProductPage';
 
 function App() {
   const [apiData, setApiData] = useState<api | {}>({});

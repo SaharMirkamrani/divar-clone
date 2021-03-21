@@ -563,4 +563,3 @@ export const globalStyles = css`
 
   ${swiperStyle}
 `;
-

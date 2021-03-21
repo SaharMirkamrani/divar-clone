@@ -1,5 +1,5 @@
 import React from 'react';
-import SimilarProducts from './SimilarProducts/SimilarProducts';
+import SimilarProducts from '../SimilarProducts/SimilarProducts';
 
 const ProductPage = () => {
   return <SimilarProducts />
