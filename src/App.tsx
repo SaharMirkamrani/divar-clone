@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import VerticalNavbar from './components/VerticalNavbar/VerticalNavbar';
 import Search from './components/Search/Search';
 import Suggestion from './components/SuggestionBar/Suggestion';
+import SimilarProducts from './components/SimilarProducts/SimilarProducts';
 
 function App() {
   const [apiData, setApiData] = useState<api | {}>({});
