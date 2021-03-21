@@ -8,7 +8,11 @@ const SimilarProducts = () => (
   <>
     <Global styles={globalStyles} />
     <Box p={4}>
-      <Typography variant='h6' style={{ fontFamily: 'Vazir', marginBottom: '15px' }} color='textPrimary'>
+      <Typography
+        variant='h6'
+        style={{ fontFamily: 'Vazir', marginBottom: '15px' }}
+        color='textPrimary'
+      >
         کالا های مشابه در دیوار فروشگاه ها
       </Typography>
       <Box>
