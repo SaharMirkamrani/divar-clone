@@ -3,6 +3,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Banner from './BannerItem';
 import { widget } from '../../api/api_types';
+import { Box, Divider, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,6 +13,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     spacing: {
       padding: theme.spacing(1),
+    },
+    title: {
+      fontSize: '13px',
+      fontFamily: 'Vazir',
+      color: 'gray',
+      textAlign: 'left',
+      paddingLeft: '11px',
+      paddingBottom: '10px',
     },
   })
 );
@@ -25,6 +34,12 @@ const BannerList: React.FC<propsType> = ({ widget_list }) => {
 
   return (
     <div className={classes.root}>
+      <Box width='100%'>
+        <Typography className={classes.title}>
+          دیوار تهران: انواع آگهی ها و خدمات در تهران
+        </Typography>
+        <Divider style={{ width: '98%', margin: '0 auto' }} />
+      </Box>
       <Grid container>
         {widget_list.map((widget) => (
           <Grid
