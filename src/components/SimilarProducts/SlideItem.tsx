@@ -28,14 +28,20 @@ const Slide: FC<SlideProps> = ({
       width='100%'
       textAlign='right'
     >
-      <CardMedia image={imageUrl} style={{ height: '15rem', width: '100%' }} />
+      <CardMedia image={imageUrl} style={{ height: '10rem', width: '100%' }} />
       {/* <Image alt='img' src={imageUrl} height='15rem' width='100%' /> */}
       {/* <Box className='swiper-lazy-preloader swiper-lazy-preloader-white' /> */}
       <Box p={2}>
-        <Typography color='textPrimary' style={{ fontFamily: 'Vazir' }}>
+        <Typography
+          color='textPrimary'
+          style={{ fontFamily: 'Vazir', fontSize: '13px', marginBottom: '5px' }}
+        >
           تخت و سرویس خواب چرم پارس
         </Typography>
-        <Typography color='textSecondary' style={{ fontFamily: 'Vazir' }}>
+        <Typography
+          color='textSecondary'
+          style={{ fontFamily: 'Vazir', fontSize: '11px' }}
+        >
           ۳،۵۰۰،۰۰۰ تومان
         </Typography>
       </Box>
@@ -73,7 +79,6 @@ const Slide: FC<SlideProps> = ({
       display='flex'
       justifyContent='center'
       alignItems='center'
-      height='20rem'
       {...slideStyles}
     >
       {renderedContent}
