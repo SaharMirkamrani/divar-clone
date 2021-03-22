@@ -21,18 +21,31 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
 
+  title: {
+    fontFamily: 'Vazir',
+    fontSize: '15px',
+    fontWeight: 'bold',
+  },
+
   price: {
-    fontSize: 16,
+    fontSize: 13,
     fontFamily: 'Vazir',
   },
 
   time: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Vazir',
   },
 
+  redText: {
+    display: 'inline',
+    fontFamily: 'Vazir',
+    color: '#aa3230',
+    fontSize: 12,
+  },
+
   content: {
-    height: '80%',
+    height: '95%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -54,33 +67,28 @@ const useStyles = makeStyles({
 const Banner: React.FC<widgetType> = (widget) => {
   const classes = useStyles();
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card className={classes.root} variant='outlined'>
       <CardContent className={classes.content}>
-        <Typography style={{ fontFamily: 'Vazir' }} variant="h6">
-          {widget.data.title}
-        </Typography>
+        <Typography className={classes.title}>{widget.data.title}</Typography>
         <div>
-          <Typography className={classes.price} color="textSecondary">
+          <Typography className={classes.price} color='textSecondary'>
             {widget.data.description}
           </Typography>
-          <Typography className={classes.time} color="textSecondary">
-            <Typography
-              style={{ display: 'inline', fontFamily: 'Vazir' }}
-              color="error"
-            >
+          <Typography className={classes.time} color='textSecondary'>
+            <Typography className={classes.redText}>
               {widget.data.red_text}
             </Typography>
             {widget.data.normal_text}
           </Typography>
         </div>
       </CardContent>
-      <Box display="flex" flexDirection="row-reverse">
+      <Box display='flex' flexDirection='row-reverse'>
         <CardMedia
           className={classes.cover}
           image={widget.data.image || noImage}
         />
         {widget.data.has_chat ? (
-          <ChatBubbleOutlineIcon fontSize="small" className={classes.icon} />
+          <ChatBubbleOutlineIcon fontSize='small' className={classes.icon} />
         ) : null}
       </Box>
     </Card>
