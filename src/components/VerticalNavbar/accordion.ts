@@ -7,6 +7,8 @@ export const Accordion = withStyles({
   root: {
     width: '100%',
     border: '1px solid rgba(0, 0, 0, .125)',
+    borderLeft: 'none',
+    borderRight: 'none',
     boxShadow: 'none',
     '&:not(:last-child)': {
       borderBottom: 0,
