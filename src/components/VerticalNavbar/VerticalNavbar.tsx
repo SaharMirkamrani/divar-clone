@@ -9,6 +9,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import enamadLogo from './images/enamad.jpg';
+import majaziLogo from './images/majazi.png';
+import samandehiLogo from './images/samandehi.jpg';
 import {
   Box,
   FormControl,
@@ -22,11 +25,14 @@ import {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      position: 'sticky',
+      top: '-50vh',
       marginTop: '4rem',
       display: 'flex',
     },
     drawer: {
       width: '90%',
+      paddingRight: 8,
       flexShrink: 0,
     },
     drawerPaper: {
@@ -75,13 +81,25 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: 'Vazir',
     },
     navbarFooter: {
-      backgroundColor: 'red',
+      listStyle: 'none',
+      color: 'gray',
+      fontFamily: 'Vazir',
+      fontSize: '14px',
       display: 'flex',
       flexDirection: 'row',
+      justifyContent: 'space-between',
       flexWrap: 'wrap',
-      fontSize: '12px',
-      width: '100px',
-      height: '50vh',
+      width: '80%',
+      height: '10vh',
+      marginBottom: '20px',
+      paddingRight: 5,
+      '& li': {
+        paddingLeft: '5px',
+      },
+      '& li:hover': {
+        color: 'black',
+        cursor: 'pointer',
+      },
     },
   })
 );
@@ -192,6 +210,31 @@ export default function VerticalNavbar() {
           labelPlacement='start'
         />
         <Divider />
+        <Box p={1}>
+          <ul className={classes.navbarFooter}>
+            <li>درباره دیوار</li>
+            <li>دریافت برنامه</li>
+            <li>پشتیبانی</li>
+            <li>بلاگ دیوار</li>
+          </ul>
+          <Box>
+            <img
+              style={{ width: '55px', height: 'auto' }}
+              src={enamadLogo}
+              alt='enamadLogo'
+            />
+            <img
+              style={{ width: '88px', height: 'auto', marginRight: '10px' }}
+              src={majaziLogo}
+              alt='majaziLogo'
+            />
+            <img
+              style={{ width: '95px', height: 'auto' }}
+              src={samandehiLogo}
+              alt='samandehiLogo'
+            />
+          </Box>
+        </Box>
       </div>
     </div>
   );

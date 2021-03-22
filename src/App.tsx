@@ -10,6 +10,7 @@ import Suggestion from './components/SuggestionBar/Suggestion';
 import SimilarProducts from './components/SimilarProducts/SimilarProducts';
 import ProductPage from './components/ProductPage/ProductPage';
 import { Grid } from '@material-ui/core';
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 
 function App() {
   const [apiData, setApiData] = useState<api | {}>({});
@@ -51,9 +52,7 @@ function App() {
 
             {'widget_list' in apiData ? (
               <BannerList widget_list={apiData.widget_list} />
-            ) : (
-              <h2>Loading...</h2>
-            )}
+            ) : <LoadingSpinner />}
           </Grid>
         </Grid>
       </div>
