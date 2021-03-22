@@ -9,18 +9,18 @@ const SimilarProducts = () => (
     <Global styles={globalStyles} />
     <Box p={4}>
       <Typography
-        variant='h6'
-        style={{ fontFamily: 'Vazir', marginBottom: '15px' }}
+        style={{ fontFamily: 'Vazir', marginBottom: '15px', fontSize: '17px' }}
         color='textPrimary'
       >
         کالا های مشابه در دیوار فروشگاه ها
       </Typography>
       <Box>
         <Slider
+          style={{ width: '80%' }}
           hasImage={true}
           params={{
             slidesPerView: 4,
-            spaceBetween: 30,
+            spaceBetween: 18,
             slidesPerGroup: 4,
             loop: true,
             loopFillGroupWithBlank: true,

@@ -224,6 +224,7 @@ export const swiperStyle = css`
   .swiper-pagination-fraction,
   .swiper-pagination-custom,
   .swiper-container-horizontal > .swiper-pagination-bullets {
+    display: none,
     bottom: 10px;
     left: 0;
     width: 100%;

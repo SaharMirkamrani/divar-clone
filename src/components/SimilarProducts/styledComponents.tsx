@@ -8,7 +8,7 @@ export const SlideContainer: FC<FlexProps> = props => (
       position: "relative",
       ".swiper-container": {
         width: "100%",
-        height: "20rem"
+        height: "15rem"
       },
       ".swiper-pagination": {
         "&.swiper-pagination-fraction": {
