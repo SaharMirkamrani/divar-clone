@@ -7,10 +7,8 @@ import { widget } from '../../api/api_types';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      paddingTop: "70px",
-      marginRight: 290,
+      paddingTop: '70px',
       flexGrow: 1,
-      width: '78%',
     },
     spacing: {
       padding: theme.spacing(1),

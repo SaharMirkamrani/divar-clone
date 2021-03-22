@@ -2,7 +2,6 @@ import React from 'react';
 import { Accordion, AccordionDetails, AccordionSummary } from './accordion';
 import categories from './categories';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -11,6 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
+  Box,
   FormControl,
   FormControlLabel,
   InputLabel,
@@ -19,20 +19,18 @@ import {
   Switch,
 } from '@material-ui/core';
 
-const drawerWidth = 290;
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      marginTop: '4rem',
       display: 'flex',
     },
     drawer: {
-      width: drawerWidth,
+      width: '90%',
       flexShrink: 0,
     },
     drawerPaper: {
-      marginTop: 64,
-      width: drawerWidth,
+      width: '100%',
     },
     // necessary for content to be below app bar
     content: {
@@ -76,6 +74,15 @@ const useStyles = makeStyles((theme: Theme) =>
     inputLabel: {
       fontFamily: 'Vazir',
     },
+    navbarFooter: {
+      backgroundColor: 'red',
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      fontSize: '12px',
+      width: '100px',
+      height: '50vh',
+    },
   })
 );
 
@@ -90,14 +97,7 @@ export default function VerticalNavbar() {
 
   return (
     <div className={classes.root}>
-      <Drawer
-        className={classes.drawer}
-        variant='permanent'
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor='right'
-      >
+      <div className={classes.drawer}>
         <Divider />
         <List>
           <Typography className={classes.category}>دسته بندی ها</Typography>
@@ -192,13 +192,7 @@ export default function VerticalNavbar() {
           labelPlacement='start'
         />
         <Divider />
-        <Typography>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-          dolorem sequi sed nisi quasi. Ratione facere, numquam itaque dolorum
-          provident incidunt! Blanditiis ea repellendus nam explicabo. Expedita
-          aliquid doloremque facilis.
-        </Typography>
-      </Drawer>
+      </div>
     </div>
   );
 }

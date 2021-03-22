@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
     },
     searchBar: {
-      margin: '1.75rem 350px 0 1.75rem',
+      margin: '1.75rem',
       position: 'relative',
       top: '50px',
     },

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'cneter',
-      margin: '3rem 350px 0 3rem',
+      margin: '3.4rem 23px 0 3rem',
     },
   })
 );
@@ -58,7 +58,7 @@ const ButtonSug: React.FC<buttonPropsType> = ({ text }) => {
   const classes = useStyles();
   return (
     <>
-      <Button variant="outlined" size="small" className={classes.button}>
+      <Button variant='outlined' size='small' className={classes.button}>
         {text}
       </Button>
     </>
