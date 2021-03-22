@@ -28,30 +28,30 @@ function App() {
     fetchData();
   }, []);
 
-  return (
-    <div className={styles.app}>
-      <ProductPage />
-    </div>
-  );
-
   // return (
-  //   <Router>
-  //     <div className={styles.app}>
-  //       <Navbar />
-  //       <Search />
-  //       {'suggestion_list' in apiData && (
-  //         <Suggestion suggestion_list={apiData.suggestion_list} />
-  //       )}
-
-  //       {'widget_list' in apiData ? (
-  //         <BannerList widget_list={apiData.widget_list} />
-  //       ) : (
-  //         <h2>Loading...</h2>
-  //       )}
-  //       <VerticalNavbar />
-  //     </div>
-  //   </Router>
+  //   <div className={styles.app}>
+  //     <ProductPage />
+  //   </div>
   // );
+
+  return (
+    <Router>
+      <div className={styles.app}>
+        <Navbar />
+        <Search />
+        {'suggestion_list' in apiData && (
+          <Suggestion suggestion_list={apiData.suggestion_list} />
+        )}
+
+        {'widget_list' in apiData ? (
+          <BannerList widget_list={apiData.widget_list} />
+        ) : (
+          <h2>Loading...</h2>
+        )}
+        <VerticalNavbar />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
