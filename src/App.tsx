@@ -21,6 +21,7 @@ function App() {
         );
         const data = await response.json();
         setApiData(data);
+        console.log(data)
       } catch (error) {
         console.error(error);
       }
@@ -28,30 +29,33 @@ function App() {
     fetchData();
   }, []);
 
-  // return (
-  //   <div className={styles.app}>
-  //     <ProductPage />
-  //   </div>
-  // );
-
   return (
-    <Router>
-      <div className={styles.app}>
+    <div className={styles.app}>
+      <Router>
         <Navbar />
-        <Search />
-        {'suggestion_list' in apiData && (
-          <Suggestion suggestion_list={apiData.suggestion_list} />
-        )}
-
-        {'widget_list' in apiData ? (
-          <BannerList widget_list={apiData.widget_list} />
-        ) : (
-          <h2>Loading...</h2>
-        )}
-        <VerticalNavbar />
-      </div>
-    </Router>
+        <ProductPage />
+      </Router>
+    </div>
   );
+
+  // return (
+  //   <Router>
+  //     <div className={styles.app}>
+  //       <Navbar />
+  //       <Search />
+  //       {'suggestion_list' in apiData && (
+  //         <Suggestion suggestion_list={apiData.suggestion_list} />
+  //       )}
+
+  //       {'widget_list' in apiData ? (
+  //         <BannerList widget_list={apiData.widget_list} />
+  //       ) : (
+  //         <h2>Loading...</h2>
+  //       )}
+  //       <VerticalNavbar />
+  //     </div>
+  //   </Router>
+  // );
 }
 
 export default App;
