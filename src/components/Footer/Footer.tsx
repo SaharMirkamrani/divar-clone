@@ -79,7 +79,7 @@ export default function Footer() {
           <img src={Logo} alt="logo" className={classes.logo} />
         </Link>
         <Toolbar className={classes.toolbar}>
-          <div className={classes.links}>
+          <div>
             <Link className={styles.link} to="/about">
               <Button className={classes.button}>درباره دیوار</Button>
             </Link>
