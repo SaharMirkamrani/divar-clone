@@ -1,7 +1,7 @@
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { DivarContext } from '../../Divar/DivarProvider';
 import { Link } from 'react-router-dom';
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Suggestion: React.FC = () => {
   const classes = useStyles();
-  const { apiData } = useContext(DivarContext);
+  const { apiData, city } = useContext(DivarContext);
   const suggestion_list =
     'suggestion_list' in apiData ? apiData.suggestion_list : [];
 
@@ -43,7 +43,7 @@ const Suggestion: React.FC = () => {
         {suggestion_list.map((suggestion: any) => (
           <Link
             style={{ textDecoration: 'none' }}
-            to={`/${suggestion.value.category.value}`}
+            to={`/${city}/${suggestion.value.category.value}`}
           >
             <Button variant="outlined" size="small" className={classes.button}>
               {suggestion.displayed_text}

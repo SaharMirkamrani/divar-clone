@@ -16,7 +16,6 @@ const AppProvider : React.FC<propsType> =  ({ children }) => {
   const [apiData, setApiData] = useState([]);
   const [city, setCity] = useState('tehran'); 
   const url = `https://api.divar.ir/v8/web-search/${city}`;
-  console.log(city)
 
   const getData = useCallback(async () => {
     try {

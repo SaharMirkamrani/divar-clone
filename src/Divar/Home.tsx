@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { DivarContext } from './DivarProvider';
 import BannerList from '../components/Banner/BannerList';
 import VerticalNavbar from '../components/VerticalNavbar/VerticalNavbar';
