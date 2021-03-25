@@ -3,7 +3,7 @@ import { api } from './api/api_types';
 
 const url = 'https://api.divar.ir/v8/web-search/tehran';
 
-export const DivarContext = createContext<{ apiData: api | {}; getData: Function }>({
+export const DivarContext = createContext<{ apiData: api | {}; getData: any }>({
   apiData: {},
   getData: () => {},
 });

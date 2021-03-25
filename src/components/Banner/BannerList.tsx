@@ -4,6 +4,7 @@ import Banner from './BannerItem';
 import { Box, Divider, Typography } from '@material-ui/core';
 import { useContext, useEffect, useState } from 'react';
 import { DivarContext } from '../../DivarProvider';
+import { widget } from '../../api/api_types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,12 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const BannerList: React.FC = () => {
-    const classes = useStyles();
-  const { apiData, getData } = useContext(DivarContext);
+interface propsType {
+  widget_list: widget[];
+}
 
-
-  const widget_list = 'widget_list' in apiData ? apiData.widget_list : {};
+const BannerList: React.FC<propsType> = ({ widget_list }) => {
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -42,7 +43,7 @@ const BannerList: React.FC = () => {
       </Box>
       <Grid container>
         {/* @ts-ignore */}
-        {widget_list.map((widget : any) => (
+        {widget_list.map((widget: any) => (
           <Grid
             key={widget.data.token}
             className={classes.spacing}

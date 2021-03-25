@@ -6,16 +6,21 @@ import Search from './components/Search/Search';
 import Suggestion from './components/SuggestionBar/Suggestion';
 import { Grid } from '@material-ui/core';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
-import LoadMore from './components/LoadMore/LoadMore';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { widget } from './api/api_types';
 
 const Home = () => {
   const [search, setSearch] = useState('');
   const { apiData, getData } = useContext(DivarContext);
+  const [widgetList, setWidgetList] = useState<widget[]>([]);
 
-  useEffect(() => {
-    // @ts-ignore
-    getData(search);
-  }, [getData, search]);
+  const fetchMore = () => {
+    getData('');
+    if ('widget_list' in apiData) {
+      setWidgetList(widgetList.concat(apiData.widget_list));
+    }
+  };
+
 
   return (
     <div>
@@ -25,14 +30,19 @@ const Home = () => {
         </Grid>
         <Grid xs={9}>
           <Search />
-          {'suggestion_list' in apiData && (
-            <Suggestion />
-          )}
-					
+          {'suggestion_list' in apiData && <Suggestion />}
+
           {'widget_list' in apiData ? (
             <>
-              <BannerList />
-              <LoadMore />
+              <InfiniteScroll
+                dataLength={widgetList.length}
+                next={fetchMore}
+                hasMore={true}
+                loader={<LoadingSpinner />}
+              >
+                {/* @ts-ignore */}
+                <BannerList widget_list={widgetList.length === 0 ? apiData.widget_list : widgetList} />
+              </InfiniteScroll>
             </>
           ) : (
             <LoadingSpinner />

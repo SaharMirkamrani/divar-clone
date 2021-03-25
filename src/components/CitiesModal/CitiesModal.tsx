@@ -105,11 +105,9 @@ export default function CitiesModal() {
   };
   return (
     <>
-      <Link style={{ textDecoration: 'none' }} to="/tehran">
         <Button className={classes.cityButton} onClick={handleModalOpen}>
           <LocationOnIcon /> {}
         </Button>
-      </Link>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

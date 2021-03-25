@@ -15,7 +15,7 @@ const Divar = () => {
               path={`${bannerDetailPath}/:title`}
               component={ProductPage}
             />
-            <Route path="/tehran" component={Home} />
+            <Route path="/" component={Home} />
           </Switch>
         </Layout>
       </DivarProvider>

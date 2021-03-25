@@ -32,14 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Suggestion: React.FC = () => {
   const classes = useStyles();
-  const { apiData, getData } = useContext(DivarContext);
+  const { apiData } = useContext(DivarContext);
   const suggestion_list =
-    'suggestion_list' in apiData ? apiData.suggestion_list : {};
-
-  useEffect(() => {
-    // @ts-ignore
-    getData('');
-  }, [getData]);
+    'suggestion_list' in apiData ? apiData.suggestion_list : [];
 
   return (
     <div>
