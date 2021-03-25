@@ -1,4 +1,4 @@
-import Divar from './Divar';
+import Divar from './Divar/Divar';
 
 function App() {
   return (

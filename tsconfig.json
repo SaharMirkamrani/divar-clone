@@ -22,5 +22,5 @@
   },
   "include": [
     "./src/*"
-  ]
+, "src/Divar/routePath.js", "src/Divar/Layout.tsx", "src/Divar/Home.tsx", "src/Divar/DivarProvider.tsx", "src/Divar/Divar.tsx"  ]
 }

@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
-import { api } from './api/api_types';
+import { api } from '../api/api_types';
 
 export const DivarContext = createContext<{ apiData: api | {}; getData: any; city: any ; setCity: any}>({
   apiData: {},
@@ -16,20 +16,20 @@ const AppProvider : React.FC<propsType> =  ({ children }) => {
   const [apiData, setApiData] = useState([]);
   const [city, setCity] = useState('tehran'); 
   const url = `https://api.divar.ir/v8/web-search/${city}`;
+  console.log(city)
 
-  const getData = useCallback(async (search) => {
+  const getData = useCallback(async () => {
     try {
-      const res = await fetch(`${url}?q=${search}`);
+      const res = await fetch(`${url}`);
       const data = await res.json();
       setApiData(data);
-      setCity(city)
     } catch (error) {
       console.error(error);
     }
   }, [url]);
 
   useEffect(() => {
-    getData('');
+    getData();
   }, [getData]);
 
   return (

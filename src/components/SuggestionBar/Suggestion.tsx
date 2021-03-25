@@ -2,7 +2,7 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import { useContext, useEffect, useState } from 'react';
-import { DivarContext } from '../../DivarProvider';
+import { DivarContext } from '../../Divar/DivarProvider';
 import { Link } from 'react-router-dom';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

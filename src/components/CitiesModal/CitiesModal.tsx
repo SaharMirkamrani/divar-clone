@@ -8,7 +8,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
 import { preLoad } from '../../api/preLoadData';
-import { DivarContext } from '../../DivarProvider';
+import { DivarContext } from '../../Divar/DivarProvider';
 
 const topCities = [
   ['تهران', 'tehran'],
@@ -96,7 +96,7 @@ export default function CitiesModal() {
   const classes = useStyles();
   const location = useLocation();
   const [open, setOpen] = React.useState(false);
-  const { city, setCity, getData } = useContext(DivarContext);
+  const { city, setCity } = useContext(DivarContext);
 
   const handleModalOpen = () => {
     setOpen(true);
@@ -198,6 +198,7 @@ export default function CitiesModal() {
                   <Button
                     onClick={() => {
                       handleModalClose();
+                      setCity(city[2]);
                     }}
                     variant="outlined"
                     className={classes.cityBtn}
