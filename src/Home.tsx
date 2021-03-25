@@ -21,7 +21,6 @@ const Home = () => {
     }
   };
 
-
   return (
     <div>
       <Grid container>
@@ -40,7 +39,6 @@ const Home = () => {
                 hasMore={true}
                 loader={<LoadingSpinner />}
               >
-                {/* @ts-ignore */}
                 <BannerList widget_list={widgetList.length === 0 ? apiData.widget_list : widgetList} />
               </InfiniteScroll>
             </>
