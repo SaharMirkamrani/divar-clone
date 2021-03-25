@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Button, Box } from '@material-ui/core';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -8,6 +8,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
 import { preLoad } from '../../api/preLoadData';
+import { DivarContext } from '../../DivarProvider';
 
 const topCities = [
   ['تهران', 'tehran'],
@@ -95,6 +96,7 @@ export default function CitiesModal() {
   const classes = useStyles();
   const location = useLocation();
   const [open, setOpen] = React.useState(false);
+  const { city, setCity, getData } = useContext(DivarContext);
 
   const handleModalOpen = () => {
     setOpen(true);
@@ -105,9 +107,12 @@ export default function CitiesModal() {
   };
   return (
     <>
-        <Button className={classes.cityButton} onClick={handleModalOpen}>
-          <LocationOnIcon /> {}
-        </Button>
+      <Button className={classes.cityButton} onClick={handleModalOpen}>
+        <LocationOnIcon />
+        {city
+          ? preLoad.city.compressedData.find((x) => x[2] === city)![1]
+          : null}
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -155,9 +160,23 @@ export default function CitiesModal() {
               {topCities.map((city) => (
                 <Link style={{ textDecoration: 'none' }} to={`/${city[1]}`}>
                   {location.pathname === `/${city[1]}` ? (
-                    <Button className={classes.activeCityBtn}>{city[0]}</Button>
+                    <Button
+                      onClick={() => {
+                        setCity(city[1]);
+                      }}
+                      className={classes.activeCityBtn}
+                    >
+                      {city[0]}
+                    </Button>
                   ) : (
-                    <Button variant="outlined" className={classes.cityBtn}>
+                    <Button
+                      onClick={() => {
+                        handleModalClose();
+                        setCity(city[1]);
+                      }}
+                      variant="outlined"
+                      className={classes.cityBtn}
+                    >
                       {city[0]}
                     </Button>
                   )}
@@ -176,7 +195,13 @@ export default function CitiesModal() {
                 {location.pathname === `/${city[2]}` ? (
                   <Button className={classes.activeCityBtn}>{city[1]}</Button>
                 ) : (
-                  <Button variant="outlined" className={classes.cityBtn}>
+                  <Button
+                    onClick={() => {
+                      handleModalClose();
+                    }}
+                    variant="outlined"
+                    className={classes.cityBtn}
+                  >
                     {city[1]}
                   </Button>
                 )}

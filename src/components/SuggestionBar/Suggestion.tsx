@@ -43,7 +43,7 @@ const Suggestion: React.FC = () => {
         {suggestion_list.map((suggestion: any) => (
           <Link
             style={{ textDecoration: 'none' }}
-            to={`/${suggestion.displayed_text}`}
+            to={`/${suggestion.value.category.value}`}
           >
             <Button variant="outlined" size="small" className={classes.button}>
               {suggestion.displayed_text}
