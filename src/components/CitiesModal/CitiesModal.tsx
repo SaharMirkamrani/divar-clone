@@ -107,7 +107,7 @@ export default function CitiesModal() {
     <>
       <Link style={{ textDecoration: 'none' }} to="/tehran">
         <Button className={classes.cityButton} onClick={handleModalOpen}>
-          <LocationOnIcon /> تهران
+          <LocationOnIcon /> {}
         </Button>
       </Link>
       <Modal
