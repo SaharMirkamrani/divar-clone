@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { api } from '../api/api_types';
 
 export const DivarContext = createContext<{ apiData: api | {}; getData: any; city: any ; setCity: any}>({
@@ -12,7 +13,7 @@ interface propsType {
   children: JSX.Element;
 }
 
-const AppProvider : React.FC<propsType> =  ({ children }) => {
+const DivarProvider : React.FC<propsType> =  ({ children }) => {
   const [apiData, setApiData] = useState([]);
   const [city, setCity] = useState('tehran'); 
   const url = `https://api.divar.ir/v8/web-search/${city}`;
@@ -39,4 +40,4 @@ const AppProvider : React.FC<propsType> =  ({ children }) => {
   );
 };
 
-export default AppProvider;
+export default DivarProvider;

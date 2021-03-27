@@ -23,9 +23,10 @@ const Divar = () => {
 };
 
 const Main = () => {
-  const { city } = useContext(DivarContext);
+  const { city, setCity } = useContext(DivarContext);
   const location = useLocation();
-  console.log(location);
+  const path = location.pathname.split('/')[1];
+  setCity(path);
   return (
     <Layout>
       <Switch>
