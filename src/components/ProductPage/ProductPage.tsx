@@ -1,5 +1,5 @@
 import { Box, Button, createStyles, Theme } from '@material-ui/core';
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import CustomSeparator from '../Breadcrumbs/CustomSeparator';
 import MapLocation from '../MapLocation/MapLocation';
 import SimilarProducts from '../SimilarProducts/SimilarProducts';
@@ -8,6 +8,9 @@ import { makeStyles } from '@material-ui/core';
 import Description from '../Description/Description';
 import DetailsSlider from '../DetailsSlider/DetailsSlider';
 import Footer from '../Footer/Footer';
+import {useParams} from 'react-router';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import ProductProvider, {ProductContext} from '../../ProductContext/ProductProvider'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +27,21 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ProductPage = () => {
+  const [loading, setLoading] = useState(true);
+  const { token } = useParams<{ token: string }>();
+  const { pageData, getPageData } = useContext(ProductContext);
   const classes = useStyles();
+  
+  console.log(token);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(!(await getPageData(token)));
+    })();
+  }, [getPageData, token]);
+
+  if (loading) return <LoadingSpinner />;
+
   return (
     <Box>
       <Container maxWidth="md" style={{ marginTop: '90px' }}>
@@ -33,10 +50,6 @@ const ProductPage = () => {
           <Description />
           <DetailsSlider />
         </Box>
-
-        {/* <Box width="500px" height="200px">
-          <MapLocation />
-        </Box> */}
         <SimilarProducts />
       </Container>
       <Footer />

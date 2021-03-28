@@ -2,10 +2,11 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Banner from './BannerItem';
 import { Box, Divider, Typography } from '@material-ui/core';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { DivarContext } from '../../Divar/DivarProvider';
 import { widget } from '../../api/api_types';
 import { preLoad } from '../../api/preLoadData';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,7 +56,12 @@ const BannerList: React.FC<propsType> = ({ widget_list }) => {
             xs={12}
             md={6}
           >
-            <Banner {...widget} />
+            <Link
+              style={{ textDecoration: 'none' }}
+              to={`/ProductPage/${widget.data.token}`}
+            >
+              <Banner {...widget} />
+            </Link>
           </Grid>
         ))}
       </Grid>
