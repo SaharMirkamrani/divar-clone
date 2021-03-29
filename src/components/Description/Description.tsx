@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core';
 import ShareIcon from '@material-ui/icons/Share';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import { IconButton } from '@material-ui/core';
+import { useContext } from 'react';
+import { ProductContext } from '../../ProductContext/ProductProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: 'Vazir',
       fontSize: '1.5em',
       color: 'rgba(0,0,0,.87)',
-      fontWeight: 500,
+      fontWeight: 'bold',
     },
     descriptionHelper: {
       margin: '8px 0 16px',
@@ -65,40 +67,95 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'space-around',
       marginRight: '30px',
     },
+    listData: {
+      fontFamily: 'Vazir',
+    },
+    linksBtn: {
+      fontFamily: 'Vazir',
+      backgroundColor: 'rgba(224, 224, 224, .3)',
+      margin: '5px',
+      color: 'gray',
+    },
   })
 );
 
 const Description = () => {
   const classes = useStyles();
+  const { pageData } = useContext(ProductContext);
+  const { title, description } =
+    'data' in pageData
+      ? pageData.data.share
+      : { title: null, description: null };
+
   return (
-				<>
-          <Box className={classes.description}>
-            <Typography variant="h1" className={classes.descriptionHeader}>
-              کتونی ریبوک جی ال ۶۰۰۰ ویتنام سایز ۳۷
-            </Typography>
-            <Typography variant="h5" className={classes.descriptionHelper}>
-              دقایقی پیش در کرج
-            </Typography>
-            <Box className={classes.buttons}>
-              <Button variant="contained" className={classes.infoBtn}>
-                اطلاعات تماس
-              </Button>
-              <Button variant="outlined" className={classes.chatBtn}>
-                چت
-              </Button>
-              <Box className={classes.socialMedia}>
-                <IconButton>
-                  <BookmarkBorderIcon style={{ fontSize: '.9em' }} />
-                </IconButton>
-                <IconButton>
-                  <ShareIcon style={{ fontSize: '.9em' }} />
-                </IconButton>
-              </Box>
-            </Box>
+    <>
+      <Box className={classes.description}>
+        <Typography variant="h1" className={classes.descriptionHeader}>
+          {title}
+        </Typography>
+        <Typography variant="h5" className={classes.descriptionHelper}>
+          {'widgets' in pageData && pageData.widgets.header.subtitle}
+        </Typography>
+        <Box className={classes.buttons}>
+          <Button variant="contained" className={classes.infoBtn}>
+            اطلاعات تماس
+          </Button>
+          <Button variant="outlined" className={classes.chatBtn}>
+            چت
+          </Button>
+          <Box className={classes.socialMedia}>
+            <IconButton>
+              <BookmarkBorderIcon style={{ fontSize: '.9em' }} />
+            </IconButton>
+            <IconButton>
+              <ShareIcon style={{ fontSize: '.9em' }} />
+            </IconButton>
           </Box>
-				</>
+        </Box>
+        <Box width="78%" my={3}>
+          {'widgets' in pageData &&
+            // @ts-ignore
+            pageData.widgets.list_data.map((data) => (
+              <>
+                <Box display="flex" justifyContent="space-between" p={1}>
+                  <Typography className={classes.listData}>
+                    {data.title}
+                  </Typography>
+                  <Typography className={classes.listData} color="textPrimary">
+                    {data.value}
+                  </Typography>
+                </Box>
+                <hr style={{ opacity: '.2' }} />
+              </>
+            ))}
+        </Box>
+        <Typography
+          variant="h6"
+          style={{ fontFamily: 'Vazir', fontWeight: 500, color: 'black' }}
+        >
+          توضیحات
+        </Typography>
+        <Typography
+          style={{
+            fontFamily: 'Vazir',
+            marginTop: '10px',
+            whiteSpace: 'pre-wrap',
+          }}
+          color="textPrimary"
+        >
+          {description}
+        </Typography>
+        {'widgets' in pageData && (
+          <Box my={2}>
+            {/* @ts-ignore */}
+            {pageData.widgets.links.map((link) => (
+              <Button className={classes.linksBtn}>{link.title}</Button>
+            ))}
+          </Box>
+        )}
+      </Box>
+    </>
   );
 };
 
 export default Description;
-

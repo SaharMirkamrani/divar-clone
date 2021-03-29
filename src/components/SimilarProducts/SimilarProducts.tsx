@@ -16,12 +16,12 @@ const SimilarProducts = () => (
       </Typography>
       <Box>
         <Slider
-          style={{ width: '80%' }}
+          style={{ width: '100%' }}
           hasImage={true}
           params={{
             slidesPerView: 4,
             spaceBetween: 18,
-            slidesPerGroup: 4,
+            slidesPerGroup: 1,
             loop: true,
             loopFillGroupWithBlank: true,
             pagination: {

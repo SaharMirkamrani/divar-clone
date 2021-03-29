@@ -1,41 +1,34 @@
-import { theme, globalStyles } from './stylesConfig';
+import React from 'react';
+import { globalStyles } from './stylesConfig';
 import { Global } from '@emotion/core';
-import { Box, Heading } from '@react-yuki/ui';
+import { Box } from '@react-yuki/ui';
 import Slider from './Slider';
 
 const DetailsSlider = () => (
   <>
     <Global styles={globalStyles} />
     <Box p={4}>
-      <Box>
-        <Heading
-          as="h1"
-          color="orange.4"
-          fontSize={13}
-          m={0}
-          my={4}
-          fontWeight={1}
-          textAlign="center"
-        >
-        </Heading>
-      </Box>
-      <Box>
-        <Slider
-          params={{
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            pagination: {
-              el: '.swiper-pagination',
-              clickable: true,
-            },
+      <Slider
+        style={{ width: '100%', height: '92vh' }}
+        id='thumbs-gallery-with-two-way-control'
+        hasImage
+        params={[
+          {
+            spaceBetween: 10,
             navigation: {
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
             },
-          }}
-        />
-      </Box>
+          },
+          {
+            spaceBetween: 10,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            touchRatio: 0.2,
+            slideToClickedSlide: true,
+          },
+        ]}
+      />
     </Box>
   </>
 );

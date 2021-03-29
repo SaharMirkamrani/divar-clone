@@ -1,4 +1,4 @@
-import { Box, Button, createStyles, Theme } from '@material-ui/core';
+import { Box, createStyles, Theme } from '@material-ui/core';
 import React, {useState, useEffect, useContext, useCallback} from 'react';
 import CustomSeparator from '../Breadcrumbs/CustomSeparator';
 import MapLocation from '../MapLocation/MapLocation';
@@ -10,8 +10,7 @@ import DetailsSlider from '../DetailsSlider/DetailsSlider';
 import Footer from '../Footer/Footer';
 import {useParams} from 'react-router';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ProductProvider, {ProductContext} from '../../ProductContext/ProductProvider';
-import DivarProvider, {DivarContext} from '../../Divar/DivarProvider';
+import {ProductContext} from '../../ProductContext/ProductProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,7 +51,10 @@ const ProductPage = () => {
           <Description />
           <DetailsSlider />
         </Box>
-        <SimilarProducts />
+        {'widgets' in pageData &&
+        pageData.widgets.suggestions.suggestion_available && (
+          <SimilarProducts />
+        )}
       </Container>
       <Footer />
     </Box>
