@@ -1,5 +1,5 @@
 import { Box, Button, createStyles, Theme } from '@material-ui/core';
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useCallback} from 'react';
 import CustomSeparator from '../Breadcrumbs/CustomSeparator';
 import MapLocation from '../MapLocation/MapLocation';
 import SimilarProducts from '../SimilarProducts/SimilarProducts';
@@ -10,7 +10,8 @@ import DetailsSlider from '../DetailsSlider/DetailsSlider';
 import Footer from '../Footer/Footer';
 import {useParams} from 'react-router';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import ProductProvider, {ProductContext} from '../../ProductContext/ProductProvider'
+import ProductProvider, {ProductContext} from '../../ProductContext/ProductProvider';
+import DivarProvider, {DivarContext} from '../../Divar/DivarProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,18 +28,19 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ProductPage = () => {
+  const classes = useStyles();
   const [loading, setLoading] = useState(true);
   const { token } = useParams<{ token: string }>();
   const { pageData, getPageData } = useContext(ProductContext);
-  const classes = useStyles();
-  
-  console.log(token);
+
+
+  const showLoading = useCallback(async ()=> {
+    setLoading(!(await getPageData(token)));
+  },[getPageData, token])
 
   useEffect(() => {
-    (async () => {
-      setLoading(!(await getPageData(token)));
-    })();
-  }, [getPageData, token]);
+    showLoading();
+  }, [showLoading]);
 
   if (loading) return <LoadingSpinner />;
 

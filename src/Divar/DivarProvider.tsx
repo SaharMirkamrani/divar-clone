@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { api } from '../api/api_types';
+import Cookies from 'js-cookie';
 
 export const DivarContext = createContext<{ apiData: api | {}; getData: any; city: any ; setCity: any}>({
   apiData: {},
@@ -14,8 +15,10 @@ interface propsType {
 }
 
 const DivarProvider : React.FC<propsType> =  ({ children }) => {
+  Cookies.set('city', 'tehran')
   const [apiData, setApiData] = useState([]);
-  const [city, setCity] = useState('tehran'); 
+  const [city, setCity] = useState(() => Cookies.get('city')); 
+  console.log(city)
   const url = `https://api.divar.ir/v8/web-search/${city}`;
 
   const getData = useCallback(async () => {

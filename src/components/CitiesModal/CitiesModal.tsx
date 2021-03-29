@@ -9,6 +9,7 @@ import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
 import { preLoad } from '../../api/preLoadData';
 import { DivarContext } from '../../Divar/DivarProvider';
+import Cookies from 'js-cookie';
 
 const topCities = [
   ['تهران', 'tehran'],
@@ -98,6 +99,7 @@ export default function CitiesModal() {
   const [open, setOpen] = React.useState(false);
   const { city, setCity } = useContext(DivarContext);
 
+  console.log(city);
   const handleModalOpen = () => {
     setOpen(true);
   };
@@ -110,7 +112,7 @@ export default function CitiesModal() {
       <Button className={classes.cityButton} onClick={handleModalOpen}>
         <LocationOnIcon />
         {city
-          ? preLoad.city.compressedData.find((x) => x[2] === city)![1]
+          ? preLoad?.city?.compressedData?.find((x) => x[2] === city)![1]
           : null}
       </Button>
       <Modal
@@ -173,6 +175,7 @@ export default function CitiesModal() {
                       onClick={() => {
                         handleModalClose();
                         setCity(city[1]);
+                        Cookies.set('city', city[1]);
                       }}
                       variant="outlined"
                       className={classes.cityBtn}
@@ -199,6 +202,7 @@ export default function CitiesModal() {
                     onClick={() => {
                       handleModalClose();
                       setCity(city[2]);
+                      Cookies.set('city', city[2] as string);
                     }}
                     variant="outlined"
                     className={classes.cityBtn}

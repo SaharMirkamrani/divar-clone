@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { DivarContext } from './DivarProvider';
 import BannerList from '../components/Banner/BannerList';
 import VerticalNavbar from '../components/VerticalNavbar/VerticalNavbar';
@@ -11,7 +11,7 @@ import { widget } from '../api/api_types';
 
 const Home = () => {
   const [search, setSearch] = useState('');
-  const { apiData, getData } = useContext(DivarContext);
+  const { apiData, getData, city } = useContext(DivarContext);
   const [widgetList, setWidgetList] = useState<widget[]>([]);
 
   const fetchMore = () => {
@@ -20,6 +20,12 @@ const Home = () => {
       setWidgetList(widgetList.concat(apiData.widget_list));
     }
   };
+
+  useEffect(() => {
+    getData();
+    setWidgetList([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [city]);
 
   return (
     <div>

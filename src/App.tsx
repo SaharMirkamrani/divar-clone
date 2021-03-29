@@ -1,4 +1,3 @@
-
 import {
   BrowserRouter as Router,
   Redirect,
@@ -14,6 +13,7 @@ import ProductProvider, {
 import Home from './Divar/Home';
 import Layout from './Divar/Layout';
 import { useContext } from 'react';
+import Cookies from 'js-cookie';
 
 const App = () => {
   return (
@@ -28,12 +28,17 @@ const App = () => {
 const Main = () => {
   const { city, setCity } = useContext(DivarContext);
   const location = useLocation();
-  const path = location.pathname.split('/')[1];
-  setCity(path);
+  if (location.pathname.startsWith(`/${city}`)) {
+    const path = location.pathname.split('/')[1];
+    Cookies.set('city', path);
+    console.log(city)
+    // setCity(() => Cookies.get('city'));
+  }
+
   return (
     <Layout>
       <Switch>
-        <Route path="/ProductPage/:token">
+        <Route path={`/ProductPage/:token`}>
           <ProductProvider>
             <ProductPage />
           </ProductProvider>
@@ -44,5 +49,6 @@ const Main = () => {
     </Layout>
   );
 };
+
 
 export default App;
