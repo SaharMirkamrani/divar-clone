@@ -19,12 +19,14 @@ const DivarProvider : React.FC<propsType> =  ({ children }) => {
   const [apiData, setApiData] = useState([]);
   const [city, setCity] = useState(() => Cookies.get('city')); 
   const url = `https://api.divar.ir/v8/web-search/${city}`;
-
+  console.log(city)
   const getData = useCallback(async (category) => {
     try {
       const res = await fetch(`${url}/${category}`);
       const data = await res.json();
       setApiData(data);
+      console.log(category);
+      
       console.log(data);
       
     } catch (error) {

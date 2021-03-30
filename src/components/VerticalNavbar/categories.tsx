@@ -10,39 +10,55 @@ import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined'
 import WeekendOutlinedIcon from '@material-ui/icons/WeekendOutlined';
 
 const categories = [
-  { name: 'املاک', icon: () => <HomeWorkOutlinedIcon fontSize='small' /> },
+  {
+    name: 'املاک',
+    url: 'real-estate',
+    icon: () => <HomeWorkOutlinedIcon fontSize="small" />,
+  },
   {
     name: 'وسایل نقلیه',
-    icon: () => <DriveEtaOutlinedIcon fontSize='small' />,
+    url: 'vehicles',
+    icon: () => <DriveEtaOutlinedIcon fontSize="small" />,
   },
   {
     name: 'لوازم الکترونیکی',
-    icon: () => <PhoneIphoneOutlinedIcon fontSize='small' />,
+    url: 'electronic-devices',
+    icon: () => <PhoneIphoneOutlinedIcon fontSize="small" />,
   },
   {
     name: 'مربوط به خانه',
-    icon: () => <WeekendOutlinedIcon fontSize='small' />,
+    url: 'home-and-kitchen',
+    icon: () => <WeekendOutlinedIcon fontSize="small" />,
   },
-  { name: 'خدمات', icon: () => <LocalShippingOutlinedIcon fontSize='small' /> },
+  {
+    name: 'خدمات',
+    url: 'services',
+    icon: () => <LocalShippingOutlinedIcon fontSize="small" />,
+  },
   {
     name: 'وسایل شخصی',
-    icon: () => <WatchOutlinedIcon fontSize='small' />,
+    url: 'personal-goods',
+    icon: () => <WatchOutlinedIcon fontSize="small" />,
   },
   {
     name: 'سرگرمی و فراغت',
-    icon: () => <CasinoOutlinedIcon fontSize='small' />,
+    url: 'entertainment',
+    icon: () => <CasinoOutlinedIcon fontSize="small" />,
   },
   {
     name: 'اجتماعی',
-    icon: () => <PeopleAltOutlinedIcon fontSize='small' />,
+    url: 'social-services',
+    icon: () => <PeopleAltOutlinedIcon fontSize="small" />,
   },
   {
     name: 'برای کسب و کار',
-    icon: () => <EventSeatOutlinedIcon fontSize='small' />,
+    url: 'businesses',
+    icon: () => <EventSeatOutlinedIcon fontSize="small" />,
   },
   {
     name: 'استخدام و کاریابی',
-    icon: () => <BusinessCenterOutlinedIcon fontSize='small' />,
+    url: 'jobs',
+    icon: () => <BusinessCenterOutlinedIcon fontSize="small" />,
   },
 ];
 

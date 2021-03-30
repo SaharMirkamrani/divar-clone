@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary } from './accordion';
 import categories from './categories';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -21,6 +21,8 @@ import {
   Select,
   Switch,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { DivarContext } from '../../Divar/DivarProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -108,6 +110,7 @@ export default function VerticalNavbar() {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(false);
   const [age, setAge] = React.useState('');
+  const { city, getData } = useContext(DivarContext);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -119,32 +122,44 @@ export default function VerticalNavbar() {
         <Divider />
         <List>
           <Typography className={classes.category}>دسته بندی ها</Typography>
-          {categories.map((category, index) => (
-            <ListItem button key={category.name} className={classes.listItem}>
-              <ListItemIcon>{category.icon()}</ListItemIcon>
-              <ListItemText
-                style={{ marginRight: '-30px' }}
-                classes={{ primary: classes.listItemText }}
-                primary={category.name}
-              />
-            </ListItem>
+          {categories.map((category) => (
+            // @ts-ignore
+            // <a
+            //   href={`${city}/${category.url}`}
+            //   style={{ textDecoration: 'none' }}
+            // >
+              <ListItem
+                onClick={() => getData(category.url)}
+                button
+                key={category.name}
+                className={classes.listItem}
+              >
+                <ListItemIcon>{category.icon()}</ListItemIcon>
+                <ListItemText
+                  style={{ marginRight: '-30px' }}
+                  classes={{ primary: classes.listItemText }}
+                  primary={category.name}
+                />
+              </ListItem>
+            // </a>
+            
           ))}
         </List>
         <Divider />
         <FormControlLabel
           control={
-            <Switch checked={checked} onChange={handleChange} name='checkedA' />
+            <Switch checked={checked} onChange={handleChange} name="checkedA" />
           }
           classes={{ label: classes.formControlLabelText }}
           className={classes.formControlLabel}
-          label='فقط آگهی های فروشگاه'
-          labelPlacement='start'
+          label="فقط آگهی های فروشگاه"
+          labelPlacement="start"
         />
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls='panel1a-content'
-            id='panel1a-header'
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
             <Typography className={classes.heading}>محل</Typography>
           </AccordionSummary>
@@ -168,8 +183,8 @@ export default function VerticalNavbar() {
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls='panel1a-content'
-            id='panel1a-header'
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
             <Typography className={classes.heading}>قیمت</Typography>
           </AccordionSummary>
@@ -192,22 +207,22 @@ export default function VerticalNavbar() {
         <Divider />
         <FormControlLabel
           control={
-            <Switch checked={checked} onChange={handleChange} name='checkedA' />
+            <Switch checked={checked} onChange={handleChange} name="checkedA" />
           }
           className={classes.formControlLabel}
           classes={{ label: classes.formControlLabelText }}
-          label='فقط عکس دار'
-          labelPlacement='start'
+          label="فقط عکس دار"
+          labelPlacement="start"
         />
         <Divider />
         <FormControlLabel
           control={
-            <Switch checked={checked} onChange={handleChange} name='checkedA' />
+            <Switch checked={checked} onChange={handleChange} name="checkedA" />
           }
           className={classes.formControlLabel}
           classes={{ label: classes.formControlLabelText }}
-          label='فقط فوری'
-          labelPlacement='start'
+          label="فقط فوری"
+          labelPlacement="start"
         />
         <Divider />
         <Box p={1}>
@@ -221,17 +236,17 @@ export default function VerticalNavbar() {
             <img
               style={{ width: '55px', height: 'auto' }}
               src={enamadLogo}
-              alt='enamadLogo'
+              alt="enamadLogo"
             />
             <img
               style={{ width: '88px', height: 'auto', marginRight: '10px' }}
               src={majaziLogo}
-              alt='majaziLogo'
+              alt="majaziLogo"
             />
             <img
               style={{ width: '95px', height: 'auto' }}
               src={samandehiLogo}
-              alt='samandehiLogo'
+              alt="samandehiLogo"
             />
           </Box>
         </Box>
