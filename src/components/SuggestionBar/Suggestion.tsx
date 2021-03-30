@@ -30,28 +30,39 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const categories = [
+  ['خودروسواری', 'car'],
+  ['فروش آپارتمان', 'buy-apartment'],
+  ['اجاره آپارتمان', 'rent-apartment'],
+  ['موبایل', 'mobile-phones'],
+  ['مبلمان', 'sofa-armchair'],
+  ['حیوانات', 'pets-animals'],
+  ['وسایل شخصی', 'personal-goods'],
+  ['خدمات', 'services'],
+  ['استخدام', 'jobs'],
+  ['تلویزیون', 'tv-projector'],
+];
+
 const Suggestion: React.FC = () => {
   const classes = useStyles();
-  const { apiData, city, getData } = useContext(DivarContext);
-  const suggestion_list =
-    'suggestion_list' in apiData ? apiData.suggestion_list : [];
+  const { city, getData } = useContext(DivarContext);
 
   return (
     <div>
       <Box className={classes.sugBar}>
         {/* @ts-ignore */}
-        {suggestion_list.map((suggestion: any) => (
+        {categories.map((suggestion: any) => (
           <Link
             style={{ textDecoration: 'none' }}
-            to={`/${city}/${suggestion.value.category.value}`}
+            to={`/${city}/${suggestion[1]}`}
           >
             <Button
               variant="outlined"
               size="small"
               className={classes.button}
-              onClick={() => getData(suggestion.value.category.value)}
+              onClick={() => getData(suggestion[1])}
             >
-              {suggestion.displayed_text}
+              {suggestion[0]}
             </Button>
           </Link>
         ))}
