@@ -18,21 +18,22 @@ const DivarProvider : React.FC<propsType> =  ({ children }) => {
   Cookies.set('city', 'tehran')
   const [apiData, setApiData] = useState([]);
   const [city, setCity] = useState(() => Cookies.get('city')); 
-  console.log(city)
   const url = `https://api.divar.ir/v8/web-search/${city}`;
 
-  const getData = useCallback(async () => {
+  const getData = useCallback(async (category) => {
     try {
-      const res = await fetch(`${url}`);
+      const res = await fetch(`${url}/${category}`);
       const data = await res.json();
       setApiData(data);
+      console.log(data);
+      
     } catch (error) {
       console.error(error);
     }
   }, [url]);
 
   useEffect(() => {
-    getData();
+    getData('');
   }, [getData]);
 
   return (

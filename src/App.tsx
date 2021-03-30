@@ -28,12 +28,12 @@ const App = () => {
 const Main = () => {
   const { city, setCity } = useContext(DivarContext);
   const location = useLocation();
-  if (location.pathname.startsWith(`/${city}`)) {
-    const path = location.pathname.split('/')[1];
-    Cookies.set('city', path);
-    console.log(city)
-    // setCity(() => Cookies.get('city'));
-  }
+  // if (location.pathname.startsWith(`/${city}`)) {
+  //   const path = location.pathname.split('/')[1];
+  //   Cookies.set('city', path);
+  //   // console.log(city)
+  //   // setCity(() => Cookies.get('city'));
+  // }
 
   return (
     <Layout>
@@ -44,7 +44,7 @@ const Main = () => {
           </ProductProvider>
         </Route>
         {location.pathname === '/' && <Redirect to="/tehran" />}
-        <Route exact path={`/${city}`} component={Home} />
+        <Route path={`/${city}`} component={Home} />
       </Switch>
     </Layout>
   );

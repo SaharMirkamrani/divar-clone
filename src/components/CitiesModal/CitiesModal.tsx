@@ -99,7 +99,6 @@ export default function CitiesModal() {
   const [open, setOpen] = React.useState(false);
   const { city, setCity } = useContext(DivarContext);
 
-  console.log(city);
   const handleModalOpen = () => {
     setOpen(true);
   };

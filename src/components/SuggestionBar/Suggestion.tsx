@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Suggestion: React.FC = () => {
   const classes = useStyles();
-  const { apiData, city } = useContext(DivarContext);
+  const { apiData, city, getData } = useContext(DivarContext);
   const suggestion_list =
     'suggestion_list' in apiData ? apiData.suggestion_list : [];
 
@@ -45,7 +45,12 @@ const Suggestion: React.FC = () => {
             style={{ textDecoration: 'none' }}
             to={`/${city}/${suggestion.value.category.value}`}
           >
-            <Button variant="outlined" size="small" className={classes.button}>
+            <Button
+              variant="outlined"
+              size="small"
+              className={classes.button}
+              onClick={() => getData(suggestion.value.category.value)}
+            >
               {suggestion.displayed_text}
             </Button>
           </Link>
