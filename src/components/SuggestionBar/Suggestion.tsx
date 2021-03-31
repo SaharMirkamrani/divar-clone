@@ -44,21 +44,22 @@ const categories = [
 ];
 
 interface propsTypes {
-  setCategory: Function,
+  setCategory: Function;
 }
 
-const Suggestion: React.FC <propsTypes> = ({ setCategory }) => {
+const Suggestion: React.FC<propsTypes> = ({ setCategory }) => {
   const classes = useStyles();
+  const { city } = useContext(DivarContext);
 
   return (
     <div>
       <Box className={classes.sugBar}>
         {/* @ts-ignore */}
         {categories.map((suggestion: any) => (
-          // <Link
-          //   style={{ textDecoration: 'none' }}
-          //   to={`/${city}/${suggestion[1]}`}
-          // >
+          <Link
+            style={{ textDecoration: 'none' }}
+            to={`/${city}/${suggestion[1]}`}
+          >
             <Button
               variant="outlined"
               size="small"
@@ -67,7 +68,7 @@ const Suggestion: React.FC <propsTypes> = ({ setCategory }) => {
             >
               {suggestion[0]}
             </Button>
-          // </Link>
+          </Link>
         ))}
       </Box>
     </div>

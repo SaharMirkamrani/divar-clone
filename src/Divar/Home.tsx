@@ -32,12 +32,11 @@ const Home = () => {
     <div>
       <Grid container>
         <Grid xs={3}>
-          <VerticalNavbar />
+          <VerticalNavbar setCategory={setCategory} />
         </Grid>
         <Grid xs={9}>
           <Search setSearch={setSearch} />
-          {'suggestion_list' in apiData && <Suggestion setCategory={setCategory} />}
-
+          <Suggestion setCategory={setCategory} />
           {'widget_list' in apiData ? (
             <>
               <InfiniteScroll

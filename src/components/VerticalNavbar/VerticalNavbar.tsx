@@ -106,11 +106,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function VerticalNavbar() {
+interface propsTypes {
+  setCategory: Function;
+}
+
+const VerticalNavbar: React.FC<propsTypes> = ({ setCategory }) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(false);
   const [age, setAge] = React.useState('');
-  const { city, getData } = useContext(DivarContext);
+  const { city } = useContext(DivarContext);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -124,12 +128,12 @@ export default function VerticalNavbar() {
           <Typography className={classes.category}>دسته بندی ها</Typography>
           {categories.map((category) => (
             // @ts-ignore
-            // <a
-            //   href={`${city}/${category.url}`}
-            //   style={{ textDecoration: 'none' }}
-            // >
+            <Link
+              style={{ textDecoration: 'none' }}
+              to={`/${city}/${category.url}`}
+            >
               <ListItem
-                onClick={() => getData(category.url)}
+                onClick={() => setCategory(category.url)}
                 button
                 key={category.name}
                 className={classes.listItem}
@@ -141,8 +145,7 @@ export default function VerticalNavbar() {
                   primary={category.name}
                 />
               </ListItem>
-            // </a>
-            
+            </Link>
           ))}
         </List>
         <Divider />
@@ -253,4 +256,6 @@ export default function VerticalNavbar() {
       </div>
     </div>
   );
-}
+};
+
+export default VerticalNavbar;
