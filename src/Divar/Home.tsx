@@ -26,7 +26,7 @@ const Home = () => {
     getData(category, search);
     setWidgetList([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city,category, search]);
+  }, [city, category, search]);
 
   return (
     <div>

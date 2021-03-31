@@ -28,13 +28,15 @@ const DivarProvider: React.FC<propsType> = ({ children }) => {
   const getData = useCallback(
     async (category, search) => {
       try {
-        const urlValue = category
-          ? `${url}/${category}`
-          : `${url}/${category}?q=${search}`;
+        const urlValue = search
+          ? `${url}/${category}?q=${search}`
+          : `${url}/${category}`;
         const res = await fetch(urlValue);
         const data = await res.json();
         setApiData(data);
         console.log(category);
+        console.log(search);
+        console.log(url);
       } catch (error) {
         console.error(error);
       }
