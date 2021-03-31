@@ -13,6 +13,7 @@ const Home = () => {
   const [search, setSearch] = useState('');
   const { apiData, getData, city } = useContext(DivarContext);
   const [widgetList, setWidgetList] = useState<widget[]>([]);
+  const [category, setCategory] = useState('');
 
   const fetchMore = () => {
     getData();
@@ -22,10 +23,10 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getData();
+    getData(category, search);
     setWidgetList([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city]);
+  }, [city,category, search]);
 
   return (
     <div>
@@ -34,8 +35,8 @@ const Home = () => {
           <VerticalNavbar />
         </Grid>
         <Grid xs={9}>
-          <Search />
-          {'suggestion_list' in apiData && <Suggestion />}
+          <Search setSearch={setSearch} />
+          {'suggestion_list' in apiData && <Suggestion setCategory={setCategory} />}
 
           {'widget_list' in apiData ? (
             <>

@@ -43,28 +43,31 @@ const categories = [
   ['تلویزیون', 'tv-projector'],
 ];
 
-const Suggestion: React.FC = () => {
+interface propsTypes {
+  setCategory: Function,
+}
+
+const Suggestion: React.FC <propsTypes> = ({ setCategory }) => {
   const classes = useStyles();
-  const { city, getData } = useContext(DivarContext);
 
   return (
     <div>
       <Box className={classes.sugBar}>
         {/* @ts-ignore */}
         {categories.map((suggestion: any) => (
-          <Link
-            style={{ textDecoration: 'none' }}
-            to={`/${city}/${suggestion[1]}`}
-          >
+          // <Link
+          //   style={{ textDecoration: 'none' }}
+          //   to={`/${city}/${suggestion[1]}`}
+          // >
             <Button
               variant="outlined"
               size="small"
               className={classes.button}
-              onClick={() => getData(suggestion[1])}
+              onClick={() => setCategory(suggestion[1])}
             >
               {suggestion[0]}
             </Button>
-          </Link>
+          // </Link>
         ))}
       </Box>
     </div>
