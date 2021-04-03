@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary } from './accordion';
 import categories from './categories';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -108,17 +108,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface propsTypes {
   setCategory: Function;
+  redText: boolean;
+  setRedText: Function;
+  photo: boolean;
+  setPhoto: Function;
 }
 
-const VerticalNavbar: React.FC<propsTypes> = ({ setCategory }) => {
+const VerticalNavbar: React.FC<propsTypes> = ({ setCategory, redText, setRedText, photo, setPhoto}) => {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState(false);
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = useState('');
   const { city } = useContext(DivarContext);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-  };
 
   return (
     <div className={classes.root}>
@@ -151,11 +150,15 @@ const VerticalNavbar: React.FC<propsTypes> = ({ setCategory }) => {
         <Divider />
         <FormControlLabel
           control={
-            <Switch checked={checked} onChange={handleChange} name="checkedA" />
+            <Switch
+              checked={redText}
+              onChange={(e) => setRedText(e.target.checked)}
+              name="checkedA"
+            />
           }
           classes={{ label: classes.formControlLabelText }}
           className={classes.formControlLabel}
-          label="فقط آگهی های فروشگاه"
+          label="آگهی های فروشکاه یا فوری"
           labelPlacement="start"
         />
         <Accordion>
@@ -210,21 +213,15 @@ const VerticalNavbar: React.FC<propsTypes> = ({ setCategory }) => {
         <Divider />
         <FormControlLabel
           control={
-            <Switch checked={checked} onChange={handleChange} name="checkedA" />
+            <Switch
+              checked={photo}
+              onChange={(e) => setPhoto(e.target.checked)}
+              name="checkedA"
+            />
           }
           className={classes.formControlLabel}
           classes={{ label: classes.formControlLabelText }}
           label="فقط عکس دار"
-          labelPlacement="start"
-        />
-        <Divider />
-        <FormControlLabel
-          control={
-            <Switch checked={checked} onChange={handleChange} name="checkedA" />
-          }
-          className={classes.formControlLabel}
-          classes={{ label: classes.formControlLabelText }}
-          label="فقط فوری"
           labelPlacement="start"
         />
         <Divider />

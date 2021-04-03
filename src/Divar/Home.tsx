@@ -15,6 +15,9 @@ const Home = () => {
   const [widgetList, setWidgetList] = useState<widget[]>([]);
   const [category, setCategory] = useState('');
 
+  const [redText, setRedText] = useState(false);
+  const [photo, setPhoto] = useState(false);
+
   const fetchMore = () => {
     getData();
     if ('widget_list' in apiData) {
@@ -32,7 +35,13 @@ const Home = () => {
     <div>
       <Grid container>
         <Grid xs={3}>
-          <VerticalNavbar setCategory={setCategory} />
+          <VerticalNavbar
+            setCategory={setCategory}
+            redText={redText}
+            setRedText={setRedText}
+            photo={photo}
+            setPhoto={setPhoto}
+          />
         </Grid>
         <Grid xs={9}>
           <Search setSearch={setSearch} />
@@ -49,6 +58,8 @@ const Home = () => {
                   widget_list={
                     widgetList.length === 0 ? apiData.widget_list : widgetList
                   }
+                  redText={redText}
+                  photo={photo}
                 />
               </InfiniteScroll>
             </>

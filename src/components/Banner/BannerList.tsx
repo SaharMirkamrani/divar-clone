@@ -30,14 +30,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface propsType {
   widget_list: widget[];
+  redText: boolean;
+  photo: boolean;
 }
 
-const BannerList: React.FC<propsType> = ({ widget_list }) => {
+const BannerList: React.FC<propsType> = ({ widget_list, redText, photo }) => {
   const classes = useStyles();
   const { city } = useContext(DivarContext);
   const cityName = city
     ? preLoad.city.compressedData.find((x) => x[2] === city)![1]
     : '';
+
   return (
     <div className={classes.root}>
       <Box width="100%">
@@ -47,23 +50,85 @@ const BannerList: React.FC<propsType> = ({ widget_list }) => {
         <Divider style={{ width: '98%', margin: '0 auto' }} />
       </Box>
       <Grid container>
-        {/* @ts-ignore */}
-        {widget_list.map((widget: any) => (
-          <Grid
-            key={widget.data.token}
-            className={classes.spacing}
-            item
-            xs={12}
-            md={6}
-          >
-            <Link
-              style={{ textDecoration: 'none' }}
-              to={`/ProductPage/${widget.data.token}`}
-            >
-              <Banner {...widget} />
-            </Link>
-          </Grid>
-        ))}
+        {photo
+          ? widget_list
+              .filter((widget: widget) => {
+                return widget.data.image !== '';
+              })
+              .map((widget: widget) => (
+                <Grid
+                  key={widget.data.token}
+                  className={classes.spacing}
+                  item
+                  xs={12}
+                  md={6}
+                >
+                  <Link
+                    style={{ textDecoration: 'none' }}
+                    to={`/ProductPage/${widget.data.token}`}
+                  >
+                    <Banner {...widget} />
+                  </Link>
+                </Grid>
+              ))
+          : redText
+          ? widget_list
+              .filter((widget: widget) => {
+                return widget.data.red_text !== '';
+              })
+              .map((widget: widget) => (
+                <Grid
+                  key={widget.data.token}
+                  className={classes.spacing}
+                  item
+                  xs={12}
+                  md={6}
+                >
+                  <Link
+                    style={{ textDecoration: 'none' }}
+                    to={`/ProductPage/${widget.data.token}`}
+                  >
+                    <Banner {...widget} />
+                  </Link>
+                </Grid>
+              ))
+          : photo && redText
+          ? widget_list
+              .filter((widget: widget) => {
+                return widget.data.red_text !== '' && widget.data.image !== '';
+              })
+              .map((widget: widget) => (
+                <Grid
+                  key={widget.data.token}
+                  className={classes.spacing}
+                  item
+                  xs={12}
+                  md={6}
+                >
+                  <Link
+                    style={{ textDecoration: 'none' }}
+                    to={`/ProductPage/${widget.data.token}`}
+                  >
+                    <Banner {...widget} />
+                  </Link>
+                </Grid>
+              ))
+          : widget_list.map((widget: widget) => (
+              <Grid
+                key={widget.data.token}
+                className={classes.spacing}
+                item
+                xs={12}
+                md={6}
+              >
+                <Link
+                  style={{ textDecoration: 'none' }}
+                  to={`/ProductPage/${widget.data.token}`}
+                >
+                  <Banner {...widget} />
+                </Link>
+              </Grid>
+            ))}
       </Grid>
     </div>
   );

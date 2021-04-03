@@ -29,12 +29,15 @@ const Main = () => {
   const { city, setCity } = useContext(DivarContext);
   const location = useLocation();
   // if (location.pathname.startsWith(`/${city}`)) {
-  //   const path = location.pathname.split('/')[1];
-  //   Cookies.set('city', path);
-  //   // console.log(city)
-  //   // setCity(() => Cookies.get('city'));
+    // const path = location.pathname.split('/')[1];
+    // Cookies.set('city', path);
+    // console.log(city)
+    // setCity(() => Cookies.get('city'));
   // }
-
+  // if (location.pathname.startsWith(`/${city}`)) {
+  // const path = location.pathname.split('/')[1];
+  // setCity(path)
+// }
   return (
     <Layout>
       <Switch>

@@ -34,9 +34,7 @@ const DivarProvider: React.FC<propsType> = ({ children }) => {
         const res = await fetch(urlValue);
         const data = await res.json();
         setApiData(data);
-        console.log(category);
-        console.log(search);
-        console.log(url);
+        console.log(data);
       } catch (error) {
         console.error(error);
       }
