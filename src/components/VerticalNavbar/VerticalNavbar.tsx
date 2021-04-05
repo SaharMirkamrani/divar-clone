@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import { Accordion, AccordionDetails, AccordionSummary } from './accordion';
+import React, { useContext } from 'react';
 import categories from './categories';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -8,21 +7,12 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import enamadLogo from './images/enamad.jpg';
 import majaziLogo from './images/majazi.png';
 import samandehiLogo from './images/samandehi.jpg';
-import {
-  Box,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  Switch,
-} from '@material-ui/core';
+import { Box, FormControlLabel, Switch } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { DivarContext } from '../../Divar/DivarProvider';
+import { DivarContext, SwitchNames } from '../../Divar/DivarProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -106,18 +96,22 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface propsTypes {
-  setCategory: Function;
-  redText: boolean;
-  setRedText: Function;
-  photo: boolean;
-  setPhoto: Function;
-}
-
-const VerticalNavbar: React.FC<propsTypes> = ({ setCategory, redText, setRedText, photo, setPhoto}) => {
+const VerticalNavbar: React.FC = () => {
   const classes = useStyles();
-  const [age, setAge] = useState('');
-  const { city } = useContext(DivarContext);
+  const {
+    apiData,
+    city,
+    setCategory,
+    setNavbarSwitch,
+    navbarSwitch,
+  } = useContext(DivarContext);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNavbarSwitch((pre) => ({
+      ...pre,
+      [event.target.name]: event.target.checked,
+    }));
+  };
 
   return (
     <div className={classes.root}>
@@ -126,7 +120,6 @@ const VerticalNavbar: React.FC<propsTypes> = ({ setCategory, redText, setRedText
         <List>
           <Typography className={classes.category}>دسته بندی ها</Typography>
           {categories.map((category) => (
-            // @ts-ignore
             <Link
               style={{ textDecoration: 'none' }}
               to={`/${city}/${category.url}`}
@@ -148,82 +141,65 @@ const VerticalNavbar: React.FC<propsTypes> = ({ setCategory, redText, setRedText
           ))}
         </List>
         <Divider />
-        <FormControlLabel
-          control={
-            <Switch
-              checked={redText}
-              onChange={(e) => setRedText(e.target.checked)}
-              name="checkedA"
+        {'schema' in apiData &&
+        'is-store' in apiData.schema.json_schema.properties ? (
+          <>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={navbarSwitch[SwitchNames.STORE]}
+                  onChange={handleChange}
+                  name={SwitchNames.STORE}
+                />
+              }
+              classes={{ label: classes.formControlLabelText }}
+              className={classes.formControlLabel}
+              label="فقط آگهی های فروشگاه"
+              labelPlacement="start"
             />
-          }
-          classes={{ label: classes.formControlLabelText }}
-          className={classes.formControlLabel}
-          label="آگهی های فروشکاه یا فوری"
-          labelPlacement="start"
-        />
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>محل</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <FormControl className={classes.formControl}>
-              <InputLabel className={classes.inputLabel}>
-                همه محله ها
-              </InputLabel>
-              <Select
-                onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-                  setAge(event.target.value as string);
-                }}
-              >
-                <MenuItem>آبشار</MenuItem>
-                <MenuItem>آبشار</MenuItem>
-                <MenuItem>آبشار</MenuItem>
-              </Select>
-            </FormControl>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>قیمت</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <FormControl className={classes.formControl}>
-              <InputLabel className={classes.inputLabel}>Age</InputLabel>
-              <Select
-                value={age}
-                onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-                  setAge(event.target.value as string);
-                }}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-          </AccordionDetails>
-        </Accordion>
-        <Divider />
-        <FormControlLabel
-          control={
-            <Switch
-              checked={photo}
-              onChange={(e) => setPhoto(e.target.checked)}
-              name="checkedA"
+          </>
+        ) : null}
+
+        {'schema' in apiData &&
+        'has-photo' in apiData.schema.json_schema.properties ? (
+          <>
+            <Divider />
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={navbarSwitch[SwitchNames.PHOTO]}
+                  onChange={handleChange}
+                  name={SwitchNames.PHOTO}
+                />
+              }
+              className={classes.formControlLabel}
+              classes={{ label: classes.formControlLabelText }}
+              label="فقط عکس دار"
+              labelPlacement="start"
             />
-          }
-          className={classes.formControlLabel}
-          classes={{ label: classes.formControlLabelText }}
-          label="فقط عکس دار"
-          labelPlacement="start"
-        />
+          </>
+        ) : null}
+
+        {'schema' in apiData &&
+        'urgent' in apiData.schema.json_schema.properties ? (
+          <>
+            <Divider />
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={navbarSwitch[SwitchNames.URGENT]}
+                  onChange={handleChange}
+                  name={SwitchNames.URGENT}
+                />
+              }
+              className={classes.formControlLabel}
+              classes={{ label: classes.formControlLabelText }}
+              label="فقط فوری"
+              labelPlacement="start"
+            />
+          </>
+        ) : null}
+
         <Divider />
         <Box p={1}>
           <ul className={classes.navbarFooter}>

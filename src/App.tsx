@@ -6,14 +6,11 @@ import {
   useLocation,
 } from 'react-router-dom';
 import ProductPage from './components/ProductPage/ProductPage';
-import DivarProvider, { DivarContext } from './Divar/DivarProvider';
-import ProductProvider, {
-  ProductContext,
-} from './ProductContext/ProductProvider';
+import DivarProvider from './Divar/DivarProvider';
 import Home from './Divar/Home';
 import Layout from './Divar/Layout';
-import { useContext } from 'react';
-import Cookies from 'js-cookie';
+import ProductProvider from './ProductContext/ProductProvider';
+import NotFoundPage from './components/Error/NotFoundPage';
 
 const App = () => {
   return (
@@ -26,18 +23,7 @@ const App = () => {
 };
 
 const Main = () => {
-  const { city, setCity } = useContext(DivarContext);
   const location = useLocation();
-  // if (location.pathname.startsWith(`/${city}`)) {
-    // const path = location.pathname.split('/')[1];
-    // Cookies.set('city', path);
-    // console.log(city)
-    // setCity(() => Cookies.get('city'));
-  // }
-  // if (location.pathname.startsWith(`/${city}`)) {
-  // const path = location.pathname.split('/')[1];
-  // setCity(path)
-// }
   return (
     <Layout>
       <Switch>
@@ -47,11 +33,11 @@ const Main = () => {
           </ProductProvider>
         </Route>
         {location.pathname === '/' && <Redirect to="/tehran" />}
-        <Route path={`/${city}`} component={Home} />
+        <Route path="/:city" component={Home} />
+        <Route component={NotFoundPage} />
       </Switch>
     </Layout>
   );
 };
-
 
 export default App;

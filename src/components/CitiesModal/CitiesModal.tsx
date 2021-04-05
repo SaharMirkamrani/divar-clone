@@ -98,6 +98,7 @@ export default function CitiesModal() {
   const location = useLocation();
   const [open, setOpen] = React.useState(false);
   const { city, setCity } = useContext(DivarContext);
+  const [search, setSearch] = React.useState('');
 
   const handleModalOpen = () => {
     setOpen(true);
@@ -106,12 +107,13 @@ export default function CitiesModal() {
   const handleModalClose = () => {
     setOpen(false);
   };
+
   return (
     <>
       <Button className={classes.cityButton} onClick={handleModalOpen}>
         <LocationOnIcon />
         {city
-          ? preLoad?.city?.compressedData?.find((x) => x[2] === city)![1]
+          ? preLoad.city.compressedData.find((x) => x[2] === city)![1]
           : null}
       </Button>
       <Modal
@@ -148,6 +150,8 @@ export default function CitiesModal() {
                   input: classes.resize,
                 },
               }}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               variant="outlined"
             />
             <p
@@ -157,7 +161,6 @@ export default function CitiesModal() {
               شهر های پر بازدید
             </p>
             <Box>
-              {/* @ts-ignore */}
               {topCities.map((city) => (
                 <Link style={{ textDecoration: 'none' }} to={`/${city[1]}`}>
                   {location.pathname === `/${city[1]}` ? (
@@ -191,26 +194,51 @@ export default function CitiesModal() {
             >
               همه شهر ها
             </p>
-            {/* @ts-ignore */}
-            {preLoad.city.compressedData.map((city) => (
-              <Link style={{ textDecoration: 'none' }} to={`/${city[2]}`}>
-                {location.pathname === `/${city[2]}` ? (
-                  <Button className={classes.activeCityBtn}>{city[1]}</Button>
-                ) : (
-                  <Button
-                    onClick={() => {
-                      handleModalClose();
-                      setCity(city[2]);
-                      Cookies.set('city', city[2] as string);
-                    }}
-                    variant="outlined"
-                    className={classes.cityBtn}
-                  >
-                    {city[1]}
-                  </Button>
-                )}
-              </Link>
-            ))}
+            {search
+              ? preLoad.city.compressedData
+                  .filter((city) => (city[1] as string).includes(search))
+                  .map((city) => (
+                    <Link style={{ textDecoration: 'none' }} to={`/${city[2]}`}>
+                      {location.pathname === `/${city[2]}` ? (
+                        <Button className={classes.activeCityBtn}>
+                          {city[1]}
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            handleModalClose();
+                            setCity(city[2] as string);
+                            Cookies.set('city', city[2] as string);
+                          }}
+                          variant="outlined"
+                          className={classes.cityBtn}
+                        >
+                          {city[1]}
+                        </Button>
+                      )}
+                    </Link>
+                  ))
+              : preLoad.city.compressedData.map((city) => (
+                  <Link style={{ textDecoration: 'none' }} to={`/${city[2]}`}>
+                    {location.pathname === `/${city[2]}` ? (
+                      <Button className={classes.activeCityBtn}>
+                        {city[1]}
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => {
+                          handleModalClose();
+                          setCity(city[2] as string);
+                          Cookies.set('city', city[2] as string);
+                        }}
+                        variant="outlined"
+                        className={classes.cityBtn}
+                      >
+                        {city[1]}
+                      </Button>
+                    )}
+                  </Link>
+                ))}
           </div>
         </Fade>
       </Modal>

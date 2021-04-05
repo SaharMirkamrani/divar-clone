@@ -114,8 +114,7 @@ const Description = () => {
         </Box>
         <Box width="78%" my={3}>
           {'widgets' in pageData &&
-            // @ts-ignore
-            pageData.widgets.list_data.map((data) => (
+            pageData.widgets.list_data.map((data: any) => (
               <>
                 <Box display="flex" justifyContent="space-between" p={1}>
                   <Typography className={classes.listData}>
@@ -147,8 +146,7 @@ const Description = () => {
         </Typography>
         {'widgets' in pageData && (
           <Box my={2}>
-            {/* @ts-ignore */}
-            {pageData.widgets.links.map((link) => (
+            {pageData.widgets.links.map((link: any) => (
               <Button className={classes.linksBtn}>{link.title}</Button>
             ))}
           </Box>

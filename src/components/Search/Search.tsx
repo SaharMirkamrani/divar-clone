@@ -39,7 +39,6 @@ const Search: React.FC<propsType> = ({ setSearch }) => {
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    // @ts-ignore
     setSearch(searchV);
     setSearchV('');
   };

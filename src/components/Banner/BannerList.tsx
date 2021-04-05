@@ -30,11 +30,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface propsType {
   widget_list: widget[];
-  redText: boolean;
-  photo: boolean;
 }
 
-const BannerList: React.FC<propsType> = ({ widget_list, redText, photo }) => {
+const BannerList: React.FC<propsType> = ({ widget_list}) => {
   const classes = useStyles();
   const { city } = useContext(DivarContext);
   const cityName = city
@@ -50,70 +48,7 @@ const BannerList: React.FC<propsType> = ({ widget_list, redText, photo }) => {
         <Divider style={{ width: '98%', margin: '0 auto' }} />
       </Box>
       <Grid container>
-        {photo
-          ? widget_list
-              .filter((widget: widget) => {
-                return widget.data.image !== '';
-              })
-              .map((widget: widget) => (
-                <Grid
-                  key={widget.data.token}
-                  className={classes.spacing}
-                  item
-                  xs={12}
-                  md={6}
-                >
-                  <Link
-                    style={{ textDecoration: 'none' }}
-                    to={`/ProductPage/${widget.data.token}`}
-                  >
-                    <Banner {...widget} />
-                  </Link>
-                </Grid>
-              ))
-          : redText
-          ? widget_list
-              .filter((widget: widget) => {
-                return widget.data.red_text !== '';
-              })
-              .map((widget: widget) => (
-                <Grid
-                  key={widget.data.token}
-                  className={classes.spacing}
-                  item
-                  xs={12}
-                  md={6}
-                >
-                  <Link
-                    style={{ textDecoration: 'none' }}
-                    to={`/ProductPage/${widget.data.token}`}
-                  >
-                    <Banner {...widget} />
-                  </Link>
-                </Grid>
-              ))
-          : photo && redText
-          ? widget_list
-              .filter((widget: widget) => {
-                return widget.data.red_text !== '' && widget.data.image !== '';
-              })
-              .map((widget: widget) => (
-                <Grid
-                  key={widget.data.token}
-                  className={classes.spacing}
-                  item
-                  xs={12}
-                  md={6}
-                >
-                  <Link
-                    style={{ textDecoration: 'none' }}
-                    to={`/ProductPage/${widget.data.token}`}
-                  >
-                    <Banner {...widget} />
-                  </Link>
-                </Grid>
-              ))
-          : widget_list.map((widget: widget) => (
+        {widget_list.map((widget: widget) => (
               <Grid
                 key={widget.data.token}
                 className={classes.spacing}

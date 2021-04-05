@@ -1,16 +1,14 @@
-import { Box, createStyles, Theme } from '@material-ui/core';
-import React, {useState, useEffect, useContext, useCallback} from 'react';
-import CustomSeparator from '../Breadcrumbs/CustomSeparator';
-import MapLocation from '../MapLocation/MapLocation';
-import SimilarProducts from '../SimilarProducts/SimilarProducts';
+import { Box, createStyles, makeStyles, Theme } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { ProductContext } from '../../ProductContext/ProductProvider';
+import CustomSeparator from '../Breadcrumbs/CustomSeparator';
 import Description from '../Description/Description';
 import DetailsSlider from '../DetailsSlider/DetailsSlider';
 import Footer from '../Footer/Footer';
-import {useParams} from 'react-router';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-import {ProductContext} from '../../ProductContext/ProductProvider';
+import SimilarProducts from '../SimilarProducts/SimilarProducts';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

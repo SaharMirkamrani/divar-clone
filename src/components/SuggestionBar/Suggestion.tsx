@@ -54,7 +54,6 @@ const Suggestion: React.FC<propsTypes> = ({ setCategory }) => {
   return (
     <div>
       <Box className={classes.sugBar}>
-        {/* @ts-ignore */}
         {categories.map((suggestion: any) => (
           <Link
             style={{ textDecoration: 'none' }}

@@ -54,17 +54,13 @@ export default function CustomSeparator() {
           aria-label="breadcrumb"
         >
           {pageData.widgets.breadcrumb.categories
-            .map(
+            .map((item: any) => (
               // @ts-ignore
-              (item) => (
-                // @ts-ignore
-                <Link style={{ color: 'gray' }} to={`${item.relative_url}`}>
-                  {item.title}
-                </Link>
-              )
-            )
-            .reverse()
-            }
+              <Link style={{ color: 'gray' }} to={`${item.relative_url}`}>
+                {item.title}
+              </Link>
+            ))
+            .reverse()}
           {'data' in pageData ? (
             <Typography
               className={classes.breadcrumbs}
